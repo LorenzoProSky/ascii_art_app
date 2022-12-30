@@ -1,24 +1,27 @@
 import 'dart:io';
-
 import 'package:image/image.dart';
 
 class Asciifier {
   static List<String> asciify(String path) {
     var startImg = decodeImage(File(path).readAsBytesSync());
-    var sensblty = 2; // Min value 1
+    var sensblty = 1; // Min value 1
 
     var imageLineList = <String>[];
-    for (var yBlocK = 0; yBlocK < startImg!.height; yBlocK = yBlocK + sensblty) {
+    for (var yBlocK = 0;
+        yBlocK < startImg!.height;
+        yBlocK = yBlocK + sensblty) {
       var lineList = <String>[];
 
-      for (var xBlock = 0; xBlock < startImg.width; xBlock = xBlock + sensblty) {
+      for (var xBlock = 0;
+          xBlock < startImg.width;
+          xBlock = xBlock + sensblty) {
         var sumBlockBright = 0.0;
         for (var y = 0; y < sensblty; y++) {
           for (var x = 0; x < sensblty; x++) {
             var pixel = startImg.getPixel(x + xBlock, y + yBlocK);
             var pixelBright = (getRed(pixel) * 0.299) +
-                              (getBlue(pixel) * 0.587) +
-                              (getGreen(pixel) * 0.114);
+                (getBlue(pixel) * 0.587) +
+                (getGreen(pixel) * 0.114);
             sumBlockBright = sumBlockBright + pixelBright;
           }
         }

@@ -1,7 +1,7 @@
-import 'dart:typed_data';
+import 'dart:io';
 
-import 'package:ascii_app/utilities/asciifier.dart';
-import 'package:ascii_app/utilities/img_cache.dart';
+import 'package:ascii_app/models/asciifier.dart';
+import 'package:ascii_app/models/img_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,13 +15,15 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  Uint8List? image;
+  
   String? path;
   bool isAscii = false;
   String? asciiImage;
 
   @override
   Widget build(BuildContext context) {
+    var img = Provider.of<ImgCache>(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
@@ -40,9 +42,9 @@ class _ImagePageState extends State<ImagePage> {
                       ),
                     )
                   : FittedBox(
-                      child: (image == null)
-                          ? Image.memory(context.read<ImgCache>().imgCache)
-                          : Image.memory(image!),
+                      child: (path == null)
+                          ? Image.file(File(img.imgPath))
+                          : Image.file(File(path!)),
                     ),
             ),
             Column(
@@ -101,9 +103,7 @@ class _ImagePageState extends State<ImagePage> {
     final selectedFile = await picker.pickImage(source: ImageSource.gallery);
 
     final imgPath = selectedFile!.path;
-    final bytes = await selectedFile.readAsBytes();
     setState(() {
-      image = bytes;
       path = imgPath;
       isAscii = false;
     });
