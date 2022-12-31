@@ -42,12 +42,10 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             OutlinedButton(
-              onPressed: () {
+              onPressed: () async {
                 PermissionHandler.requestMultiplePermissions();
-                imgCacheInizializeAndNavigate(
-                  img,
-                  Navigator.of(context),
-                );
+                selectImage(img);
+                await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
               },
               style: const ButtonStyle(
                 side: MaterialStatePropertyAll(BorderSide(width: 1)),
@@ -65,14 +63,10 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
-void imgCacheInizializeAndNavigate(
-    ImgCache cache, NavigatorState navState) async {
+void selectImage(ImgCache cache) async {
   final picker = ImagePicker();
   final selectedFile = await picker.pickImage(source: ImageSource.gallery);
 
   final path = selectedFile!.path;
   cache.imgPath = path;
-
-  await navState.pushNamed(RouteGenerator.imagePage);
 }

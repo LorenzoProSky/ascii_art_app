@@ -15,7 +15,6 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  
   String? path;
   bool isAscii = false;
   String? asciiImage;
@@ -42,9 +41,9 @@ class _ImagePageState extends State<ImagePage> {
                       ),
                     )
                   : FittedBox(
-                      child: (path == null)
-                          ? Image.file(File(img.imgPath))
-                          : Image.file(File(path!)),
+                      child: 
+                          Image.file(File(img.imgPath))
+                          
                     ),
             ),
             Column(
@@ -80,7 +79,10 @@ class _ImagePageState extends State<ImagePage> {
                         ),
                       ),
                 OutlinedButton(
-                  onPressed: selectImage,
+                  onPressed: () async {
+                    selectImage(img);
+                    isAscii = false;
+                  },
                   style: const ButtonStyle(
                     side: MaterialStatePropertyAll(BorderSide(width: 1)),
                     fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
@@ -98,15 +100,12 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
-  void selectImage() async {
+  void selectImage(ImgCache cache) async {
     final picker = ImagePicker();
     final selectedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    final imgPath = selectedFile!.path;
-    setState(() {
-      path = imgPath;
-      isAscii = false;
-    });
+    final path = selectedFile!.path;
+    cache.imgPath = path;
   }
 
   void asciiImageCreate() {
