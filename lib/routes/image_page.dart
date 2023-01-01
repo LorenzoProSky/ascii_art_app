@@ -15,86 +15,103 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  bool isAscii = false;
-  String? asciiImage;
+  bool _isAscii = false;
+  String? _asciiImage;
 
   @override
   Widget build(BuildContext context) {
-    var img = Provider.of<ImagePathCache>(context);
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(35.0),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 456,
-              width: 580,
-              child: (isAscii)
-                  ? FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        // TODO Zoomable
-                        asciiImage!,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    )
-                  : FittedBox(child: Image.file(File(img.imagePath))),
-            ),
+            _imageArea(context),
             Column(
               children: [
-                (isAscii)
-                    ? OutlinedButton(
-                        onPressed: () async {
-                          await GallerySaver.saveImage(img.imagePath);
-                        },
-                        style: const ButtonStyle(
-                          side: MaterialStatePropertyAll(BorderSide(width: 1)),
-                          fixedSize:
-                              MaterialStatePropertyAll(Size.fromWidth(200)),
-                        ),
-                        child: Text(
-                          "Save Image",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      )
-                    : OutlinedButton(
-                        onPressed: () async {
-                          var a = Asciifier.asciify(img);
-                          isAscii = true;
-                          setState(() {
-                            asciiImage = a;
-                          });
-                        },
-                        style: const ButtonStyle(
-                          side: MaterialStatePropertyAll(BorderSide(width: 1)),
-                          fixedSize:
-                              MaterialStatePropertyAll(Size.fromWidth(200)),
-                        ),
-                        child: Text(
-                          "ASCIIfy",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                OutlinedButton(
-                  onPressed: () async {
-                    ImageSelector.selectImage(img);
-                    isAscii = false;
-                  },
-                  style: const ButtonStyle(
-                    side: MaterialStatePropertyAll(BorderSide(width: 1)),
-                    fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-                  ),
-                  child: Text(
-                    "Select New Image",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
+                (_isAscii)
+                    ? _saveImageButton(context)
+                    : _asciifyButton(context),
+                _selectImageButton(context),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _imageArea(BuildContext context) {
+    return SizedBox(
+      height: 456,
+      width: 580,
+      child: (_isAscii)
+          ? FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                // TODO Zoomable
+                _asciiImage!,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            )
+          : FittedBox(
+              child: Image.file(
+                  File(Provider.of<ImagePathCache>(context).imagePath))),
+    );
+  }
+
+  Widget _saveImageButton(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () async {
+        await GallerySaver.saveImage(
+            Provider.of<ImagePathCache>(context, listen: false).imagePath);
+      },
+      style: const ButtonStyle(
+        side: MaterialStatePropertyAll(BorderSide(width: 1)),
+        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
+      ),
+      child: Text(
+        "Save Image",
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+    );
+  }
+
+  Widget _asciifyButton(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () async {
+        var temp = Asciifier.asciify(
+            Provider.of<ImagePathCache>(context, listen: false).imagePath);
+        _isAscii = true;
+        setState(() {
+          _asciiImage = temp;
+        });
+      },
+      style: const ButtonStyle(
+        side: MaterialStatePropertyAll(BorderSide(width: 1)),
+        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
+      ),
+      child: Text(
+        "ASCIIfy",
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+    );
+  }
+
+  Widget _selectImageButton(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () async {
+        ImageSelector.selectImage(
+            Provider.of<ImagePathCache>(context, listen: false));
+        _isAscii = false;
+      },
+      style: const ButtonStyle(
+        side: MaterialStatePropertyAll(BorderSide(width: 1)),
+        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
+      ),
+      child: Text(
+        "Select New Image",
+        style: Theme.of(context).textTheme.bodyText1,
       ),
     );
   }

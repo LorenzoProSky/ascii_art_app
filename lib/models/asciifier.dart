@@ -4,8 +4,7 @@ import 'package:image/image.dart';
 import 'image_path_cache.dart';
 
 class Asciifier {
-  static String asciify(ImagePathCache cache) {
-    var path = cache.imagePath;
+  static String asciify(String path) {
     var startImg = decodeImage(File(path).readAsBytesSync());
     var sensblty = 1; // Min value 1
 
