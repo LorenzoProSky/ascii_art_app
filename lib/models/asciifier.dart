@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:image/image.dart';
 
+import 'image_path_cache.dart';
+
 class Asciifier {
-  static List<String> asciify(String path) {
+  static String asciify(ImagePathCache cache) {
+    var path = cache.imagePath;
     var startImg = decodeImage(File(path).readAsBytesSync());
     var sensblty = 1; // Min value 1
 
@@ -31,7 +34,13 @@ class Asciifier {
       imageLineList.add(lineList.join(""));
     }
 
-    return imageLineList;
+    var sb = StringBuffer();
+    for (var line in imageLineList) {
+      sb.write("$line\n");
+    }
+    var temp = sb.toString();
+
+    return temp;
   }
 
   static String asciiChar(double p) {

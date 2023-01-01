@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:ascii_app/models/asciifier.dart';
-import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/models/image_path_cache.dart';
+import 'package:ascii_app/models/image_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:provider/provider.dart';
@@ -47,8 +47,7 @@ class _ImagePageState extends State<ImagePage> {
                 (isAscii)
                     ? OutlinedButton(
                         onPressed: () async {
-                          await GallerySaver.saveImage(
-                              context.read<ImagePathCache>().imagePath);
+                          await GallerySaver.saveImage(img.imagePath);
                         },
                         style: const ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(width: 1)),
@@ -61,7 +60,13 @@ class _ImagePageState extends State<ImagePage> {
                         ),
                       )
                     : OutlinedButton(
-                        onPressed: asciiImageCreate,
+                        onPressed: () async {
+                          var a = Asciifier.asciify(img);
+                          isAscii = true;
+                          setState(() {
+                            asciiImage = a;
+                          });
+                        },
                         style: const ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(width: 1)),
                           fixedSize:
@@ -92,21 +97,5 @@ class _ImagePageState extends State<ImagePage> {
         ),
       ),
     );
-  }
-
-  void asciiImageCreate() {
-    List<String> list;
-    list = Asciifier.asciify(context.read<ImagePathCache>().imagePath);
-
-    var sb = StringBuffer();
-    for (var line in list) {
-      sb.write("$line\n");
-    }
-    var temp = sb.toString();
-
-    setState(() {
-      asciiImage = temp;
-      isAscii = true;
-    });
   }
 }
