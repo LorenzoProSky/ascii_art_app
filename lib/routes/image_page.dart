@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:ascii_app/models/asciifier.dart';
-import 'package:ascii_app/models/img_cache.dart';
+import 'package:ascii_app/models/image_selector.dart';
+import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ImagePage extends StatefulWidget {
@@ -15,13 +15,12 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  String? path;
   bool isAscii = false;
   String? asciiImage;
 
   @override
   Widget build(BuildContext context) {
-    var img = Provider.of<ImgCache>(context);
+    var img = Provider.of<ImagePathCache>(context);
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -36,25 +35,20 @@ class _ImagePageState extends State<ImagePage> {
                   ? FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
+                        // TODO Zoomable
                         asciiImage!,
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     )
-                  : FittedBox(
-                      child: 
-                          Image.file(File(img.imgPath))
-                          
-                    ),
+                  : FittedBox(child: Image.file(File(img.imagePath))),
             ),
             Column(
               children: [
                 (isAscii)
                     ? OutlinedButton(
                         onPressed: () async {
-                          (path == null)
-                              ? await GallerySaver.saveImage(
-                                  context.read<ImgCache>().imgPath)
-                              : await GallerySaver.saveImage(path!);
+                          await GallerySaver.saveImage(
+                              context.read<ImagePathCache>().imagePath);
                         },
                         style: const ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(width: 1)),
@@ -80,7 +74,7 @@ class _ImagePageState extends State<ImagePage> {
                       ),
                 OutlinedButton(
                   onPressed: () async {
-                    selectImage(img);
+                    ImageSelector.selectImage(img);
                     isAscii = false;
                   },
                   style: const ButtonStyle(
@@ -100,21 +94,9 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
-  void selectImage(ImgCache cache) async {
-    final picker = ImagePicker();
-    final selectedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    final path = selectedFile!.path;
-    cache.imgPath = path;
-  }
-
   void asciiImageCreate() {
     List<String> list;
-    if (path == null) {
-      list = Asciifier.asciify(context.read<ImgCache>().imgPath);
-    } else {
-      list = Asciifier.asciify(path!);
-    }
+    list = Asciifier.asciify(context.read<ImagePathCache>().imagePath);
 
     var sb = StringBuffer();
     for (var line in list) {

@@ -1,8 +1,8 @@
-import 'package:ascii_app/models/img_cache.dart';
+import 'package:ascii_app/models/image_path_cache.dart';
+import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/models/permission_handler.dart';
 import 'package:ascii_app/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var img = Provider.of<ImgCache>(context);
+    var img = Provider.of<ImagePathCache>(context);
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
             OutlinedButton(
               onPressed: () async {
                 PermissionHandler.requestMultiplePermissions();
-                selectImage(img);
+                ImageSelector.selectImage(img);
                 await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
               },
               style: const ButtonStyle(
@@ -61,12 +61,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
-
-void selectImage(ImgCache cache) async {
-  final picker = ImagePicker();
-  final selectedFile = await picker.pickImage(source: ImageSource.gallery);
-
-  final path = selectedFile!.path;
-  cache.imgPath = path;
 }

@@ -1,4 +1,4 @@
-import 'package:ascii_app/models/img_cache.dart';
+import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +10,8 @@ class AsciiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ImgCache>(
-      create: (_) => ImgCache(),
+    return ChangeNotifierProvider<ImagePathCache>(
+      create: (_) => ImagePathCache(),
       child: MaterialApp(
         title: "Ascii Image Converter App",
         theme: ThemeData(
