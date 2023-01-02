@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:image/image.dart';
 
-import 'image_path_cache.dart';
-
 class Asciifier {
   static String asciify(String path) {
     var startImg = decodeImage(File(path).readAsBytesSync());

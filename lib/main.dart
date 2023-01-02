@@ -1,5 +1,6 @@
 import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/routes.dart';
+import 'package:ascii_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,28 +15,7 @@ class AsciiApp extends StatelessWidget {
       create: (_) => ImagePathCache(),
       child: MaterialApp(
         title: "Ascii Image Converter App",
-        theme: ThemeData(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          textTheme: const TextTheme(
-            headline1: TextStyle(
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w200,
-              fontSize: 38.0,
-              color: Color.fromARGB(250, 29, 29, 29),
-            ),
-            bodyText1: TextStyle(
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w300,
-              fontSize: 18.0,
-              color: Color.fromARGB(250, 29, 29, 29),
-            ),
-            bodyText2: TextStyle(
-              fontFamily: "Lucida Console",
-              letterSpacing: 5,
-              color: Color.fromARGB(250, 29, 29, 29),
-            ),
-          ),
-        ),
+        theme: AppTheme.lightTheme,
         initialRoute: RouteGenerator.homePage,
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
