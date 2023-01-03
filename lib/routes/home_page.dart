@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
           height: 350,
           width: 380,
           child: Image(
-            image: AssetImage("assets/homeImage.png"),
+            image: AssetImage("assets/home_image.png"),
           ),
         ),
         SizedBox(
@@ -68,6 +68,7 @@ class HomePage extends StatelessWidget {
         OutlinedButton(
           onPressed: () async {
             PermissionHandler.requestMultiplePermissions();
+            Provider.of<ImagePathCache>(context).imagePath = "assets/inv_pixel.png";
             ImageSelector.selectImage(
                 Provider.of<ImagePathCache>(context, listen: false));
             await Navigator.of(context).pushNamed(RouteGenerator.imagePage);

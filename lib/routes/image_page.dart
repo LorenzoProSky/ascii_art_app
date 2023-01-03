@@ -54,9 +54,18 @@ class _ImagePageState extends State<ImagePage> {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             )
-          : FittedBox(
-              child: Image.file(
-                  File(Provider.of<ImagePathCache>(context).imagePath))),
+          : (Provider.of<ImagePathCache>(context).imagePath !=
+                  "assets/inv_pixel.png")
+              ? FittedBox(
+                  child: Image.file(
+                    File(Provider.of<ImagePathCache>(context).imagePath),
+                  ),
+                )
+              : const FittedBox(
+                  child: Image(
+                    image: AssetImage("assets/inv_pixel.png"),
+                  ),
+                ),
     );
   }
 

@@ -2,7 +2,7 @@
 import 'package:flutter/foundation.dart';
 
 class ImagePathCache with ChangeNotifier {
-  String _imagePath = "";
+  String _imagePath = "assets/inv_pixel.png";
 
   String get imagePath => _imagePath;
   set imagePath(String path) {
