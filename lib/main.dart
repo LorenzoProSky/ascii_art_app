@@ -11,15 +11,12 @@ class AsciiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ImagePathCache>(
-      create: (_) => ImagePathCache(),
-      child: MaterialApp(
-        title: "Ascii Image Converter App",
-        theme: AppTheme.lightTheme,
-        initialRoute: RouteGenerator.homePage,
-        onGenerateRoute: RouteGenerator.generateRoute,
-        debugShowCheckedModeBanner: false,
-      ),
+    return MaterialApp(
+      title: "Ascii Image Converter App",
+      theme: AppTheme.lightTheme,
+      initialRoute: RouteGenerator.homePage,
+      onGenerateRoute: RouteGenerator.generateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -20,6 +20,13 @@ class _ImagePageState extends State<ImagePage> {
   String? _asciiImage;
 
   @override
+  void initState() {
+    super.initState();
+    ImageSelector.selectImage(
+        Provider.of<ImagePathCache>(context, listen: false));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,

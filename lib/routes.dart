@@ -2,6 +2,9 @@ import 'package:ascii_app/routes/home_page.dart';
 import 'package:ascii_app/routes/image_page.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'models/image_path_cache.dart';
 
 class RouteGenerator {
   static const String homePage = "/";
@@ -17,7 +20,12 @@ class RouteGenerator {
         );
       case imagePage:
         return MaterialPageRoute(
-          builder: (_) => const LoadingOverlay(child: ImagePage(),),
+          builder: (_) => ChangeNotifierProvider<ImagePathCache>(
+            create: (_) => ImagePathCache(),
+            child: const LoadingOverlay(
+              child: ImagePage(),
+            ),
+          ),
         );
       default:
         throw const FormatException("Route not found.");
