@@ -68,7 +68,8 @@ class HomePage extends StatelessWidget {
         OutlinedButton(
           onPressed: () async {
             PermissionHandler.requestMultiplePermissions();
-            Provider.of<ImagePathCache>(context).imagePath = "assets/inv_pixel.png";
+            Provider.of<ImagePathCache>(context, listen: false).imagePath =
+                "assets/inv_pixel.png";
             ImageSelector.selectImage(
                 Provider.of<ImagePathCache>(context, listen: false));
             await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
