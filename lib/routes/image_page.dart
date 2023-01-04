@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ascii_app/models/asciifier.dart';
 import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
+import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:provider/provider.dart';
@@ -89,12 +90,16 @@ class _ImagePageState extends State<ImagePage> {
   Widget _asciifyButton(BuildContext context) {
     return OutlinedButton(
       onPressed: () async {
-        var temp = Asciifier.asciify(
+        LoadingOverlay.of(context).show();
+        var temp = await Asciifier.asciify(
             Provider.of<ImagePathCache>(context, listen: false).imagePath);
         _isAscii = true;
+        await Future.delayed(const Duration(milliseconds: 500));
         setState(() {
           _asciiImage = temp;
         });
+        // ignore: use_build_context_synchronously
+        LoadingOverlay.of(context).hide();
       },
       style: const ButtonStyle(
         side: MaterialStatePropertyAll(BorderSide(width: 1)),

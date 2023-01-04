@@ -1,5 +1,6 @@
 import 'package:ascii_app/routes/home_page.dart';
 import 'package:ascii_app/routes/image_page.dart';
+import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -16,7 +17,7 @@ class RouteGenerator {
         );
       case imagePage:
         return MaterialPageRoute(
-          builder: (_) => const ImagePage(),
+          builder: (_) => const LoadingOverlay(child: ImagePage(),),
         );
       default:
         throw const FormatException("Route not found.");
