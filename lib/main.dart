@@ -1,8 +1,6 @@
-import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/routes.dart';
 import 'package:ascii_app/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() => runApp(const AsciiApp());
 

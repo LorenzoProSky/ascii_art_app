@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:ascii_app/models/asciifier.dart';
@@ -18,6 +20,8 @@ class ImagePage extends StatefulWidget {
 class _ImagePageState extends State<ImagePage> {
   bool _isAscii = false;
   String? _asciiImage;
+  double _sensibility = 1;
+  double _charSensibility = 1;
 
   @override
   void initState() {
@@ -95,27 +99,39 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   Widget _asciifyButton(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () async {
-        LoadingOverlay.of(context).show();
-        var temp = await Asciifier.asciify(
-            Provider.of<ImagePathCache>(context, listen: false).imagePath);
-        _isAscii = true;
-        await Future.delayed(const Duration(milliseconds: 500));
-        setState(() {
-          _asciiImage = temp;
-        });
-        // ignore: use_build_context_synchronously
-        LoadingOverlay.of(context).hide();
-      },
-      style: const ButtonStyle(
-        side: MaterialStatePropertyAll(BorderSide(width: 1)),
-        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-      ),
-      child: Text(
-        "ASCIIfy",
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
+    return Column(
+      children: [
+        OutlinedButton(
+          onPressed: () async {
+            LoadingOverlay.of(context).show();
+            await Future.delayed(const Duration(milliseconds: 400));
+            var temp = await Asciifier.asciify(
+                Provider.of<ImagePathCache>(context, listen: false).imagePath,
+                _sensibility.toInt(),
+                _charSensibility.toInt());
+            _isAscii = true;
+            await Future.delayed(const Duration(milliseconds: 100));
+            setState(() {
+              _asciiImage = temp;
+            });
+            LoadingOverlay.of(context).hide();
+          },
+          style: const ButtonStyle(
+            side: MaterialStatePropertyAll(BorderSide(width: 1)),
+            fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
+          ),
+          child: Text(
+            "ASCIIfy",
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+        ),
+        Row(
+          children: [
+            _sensibilitySlider(context),
+            _charSlider(context),
+          ],
+        )
+      ],
     );
   }
 
@@ -133,6 +149,43 @@ class _ImagePageState extends State<ImagePage> {
       child: Text(
         "Select New Image",
         style: Theme.of(context).textTheme.bodyText1,
+      ),
+    );
+  }
+
+  Widget _sensibilitySlider(BuildContext context) {
+    return SizedBox(
+      width: 170,
+      child: Slider(
+        min: 1.0,
+        max: 100.0,
+        // TODO Max value can't be bigger than the image size
+        value: _sensibility,
+        divisions: 100,
+        label: '${_sensibility.round()}',
+        onChanged: (value) {
+          setState(() {
+            _sensibility = value;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _charSlider(BuildContext context) {
+    return SizedBox(
+      width: 170,
+      child: Slider(
+        min: 1.0,
+        max: 3.0,
+        value: _charSensibility,
+        divisions: 2,
+        label: '${_charSensibility.round()}',
+        onChanged: (value) {
+          setState(() {
+            _charSensibility = value;
+          });
+        },
       ),
     );
   }

@@ -1,24 +1,24 @@
 import 'dart:io';
+
+import 'package:ascii_app/models/ascii_characters_brightness.dart';
 import 'package:image/image.dart';
 
 class Asciifier {
-  static Future<String> asciify(String path) async {
+  static Future<String> asciify(
+      String path, int sensibility, int charSensibility) async {
     var startImg = decodeImage(File(path).readAsBytesSync());
-    var sensibility = 1; // Min value 1
-
-    return await _innerAsciify(startImg!, sensibility);
+    // Min value of sensibility = 1
+    var chProcessor = AsciiCharactersBrightness(charSensibility);
+    return await _innerAsciify(startImg!, sensibility, chProcessor);
   }
 
-  static Future<String> _innerAsciify(Image startImg, int sens) async {
+  static Future<String> _innerAsciify(
+      Image startImg, int sens, AsciiCharactersBrightness chProcessor) async {
     var imageLineList = <String>[];
-    for (var yBlocK = 0;
-        yBlocK < startImg.height;
-        yBlocK = yBlocK + sens) {
+    for (var yBlocK = 0; yBlocK < startImg.height; yBlocK = yBlocK + sens) {
       var lineList = <String>[];
 
-      for (var xBlock = 0;
-          xBlock < startImg.width;
-          xBlock = xBlock + sens) {
+      for (var xBlock = 0; xBlock < startImg.width; xBlock = xBlock + sens) {
         var sumBlockBright = 0.0;
         for (var y = 0; y < sens; y++) {
           for (var x = 0; x < sens; x++) {
@@ -30,7 +30,7 @@ class Asciifier {
           }
         }
         var blockBright = sumBlockBright / (sens * sens);
-        lineList.add(_asciiChar(blockBright));
+        lineList.add(chProcessor.brightnessToChar(blockBright));
       }
       imageLineList.add(lineList.join(""));
     }
@@ -40,29 +40,5 @@ class Asciifier {
       sb.write("$line\n");
     }
     return sb.toString();
-  }
-
-  static String _asciiChar(double p) {
-    var str = " ";
-    if (p >= 240) {
-      str = " ";
-    } else if (p >= 210) {
-      str = ".";
-    } else if (p >= 190) {
-      str = "*";
-    } else if (p >= 170) {
-      str = "+";
-    } else if (p >= 120) {
-      str = "^";
-    } else if (p >= 110) {
-      str = "&";
-    } else if (p >= 80) {
-      str = "8";
-    } else if (p >= 60) {
-      str = "#";
-    } else {
-      str = "@";
-    }
-    return str;
   }
 }

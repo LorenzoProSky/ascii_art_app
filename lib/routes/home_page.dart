@@ -1,9 +1,6 @@
-import 'package:ascii_app/models/image_path_cache.dart';
-import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/models/permission_handler.dart';
 import 'package:ascii_app/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
