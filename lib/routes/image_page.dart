@@ -41,9 +41,7 @@ class _ImagePageState extends State<ImagePage> {
             _imageArea(context),
             Column(
               children: [
-                (_isAscii)
-                    ? _saveImageButton(context)
-                    : _asciifyButton(context),
+                _asciifyButton(context),
                 _selectImageButton(context),
               ],
             ),
@@ -60,10 +58,14 @@ class _ImagePageState extends State<ImagePage> {
       child: (_isAscii)
           ? FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(
-                // TODO Zoomable
-                _asciiImage!,
-                style: Theme.of(context).textTheme.bodyText2,
+              child: InteractiveViewer(
+                panEnabled: true, // Set it to false to prevent panning.
+                minScale: 1,
+                maxScale: 50,
+                child: SelectableText(
+                  _asciiImage!,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
               ),
             )
           : (Provider.of<ImagePathCache>(context).imagePath !=
