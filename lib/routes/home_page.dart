@@ -1,5 +1,5 @@
 import 'package:ascii_app/models/permission_handler.dart';
-import 'package:ascii_app/routes.dart';
+import 'package:ascii_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,7 +17,8 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             _homePageImage(),
             _titleText(context),
-            _selectImageButton(context),
+            _mediaStoragePermissionAndToImagePageButton(context),
+            _cameraPermissionAndToCameraPageButton(context),
           ],
         ),
       ),
@@ -59,12 +60,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _selectImageButton(BuildContext context) {
+  Widget _mediaStoragePermissionAndToImagePageButton(BuildContext context) {
     return Column(
       children: <Widget>[
         OutlinedButton(
           onPressed: () async {
-            PermissionHandler.requestMultiplePermissions();
+            PermissionHandler.requestMediaStoragePermission();
             await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
           },
           style: const ButtonStyle(
@@ -72,7 +73,28 @@ class HomePage extends StatelessWidget {
             fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
           ),
           child: Text(
-            "Select Image",
+            "Select Image\nfrom Storage",
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _cameraPermissionAndToCameraPageButton(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        OutlinedButton(
+          onPressed: () async {
+            PermissionHandler.requestCameraPermission();
+            await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
+          },
+          style: const ButtonStyle(
+            side: MaterialStatePropertyAll(BorderSide(width: 1)),
+            fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
+          ),
+          child: Text(
+            "Take Image\nfrom Camera",
             style: Theme.of(context).textTheme.bodyText1,
           ),
         ),

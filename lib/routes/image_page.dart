@@ -7,7 +7,6 @@ import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:provider/provider.dart';
 
 class ImagePage extends StatefulWidget {
@@ -80,23 +79,6 @@ class _ImagePageState extends State<ImagePage> {
                     image: AssetImage("assets/inv_pixel.png"),
                   ),
                 ),
-    );
-  }
-
-  Widget _saveImageButton(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () async {
-        await GallerySaver.saveImage(
-            Provider.of<ImagePathCache>(context, listen: false).imagePath);
-      },
-      style: const ButtonStyle(
-        side: MaterialStatePropertyAll(BorderSide(width: 1)),
-        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-      ),
-      child: Text(
-        "Save Image",
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models/image_path_cache.dart';
+import '../models/image_path_cache.dart';
 
 class RouteGenerator {
   static const String homePage = "/";
