@@ -5,13 +5,14 @@ import 'dart:io';
 import 'package:ascii_app/models/asciifier.dart';
 import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
+import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ImagePage extends StatefulWidget {
-  final bool needCamera;
-  const ImagePage({super.key, required this.needCamera});
+  final ImagePageArguments arguments;
+  const ImagePage(this.arguments, {super.key});
 
   @override
   State<ImagePage> createState() => _ImagePageState();
@@ -27,7 +28,7 @@ class _ImagePageState extends State<ImagePage> {
   void initState() {
     super.initState();
     ImageSelector.selectImage(
-        Provider.of<ImagePathCache>(context, listen: false), widget.needCamera);
+        Provider.of<ImagePathCache>(context, listen: false), widget.arguments.needCamera);
   }
 
   @override
@@ -126,14 +127,14 @@ class _ImagePageState extends State<ImagePage> {
         _isAscii = false;
         ImageSelector.selectImage(
             Provider.of<ImagePathCache>(context, listen: false),
-            widget.needCamera);
+            widget.arguments.needCamera);
       },
       style: const ButtonStyle(
         side: MaterialStatePropertyAll(BorderSide(width: 1)),
         fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
       ),
       child: Text(
-        (widget.needCamera) ? "Take new Photo" : "Select New Image",
+        (widget.arguments.needCamera) ? "Take new Photo" : "Select New Image",
         style: Theme.of(context).textTheme.bodyText1,
       ),
     );
