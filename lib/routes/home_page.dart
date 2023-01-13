@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
         OutlinedButton(
           onPressed: () async {
             PermissionHandler.requestCameraPermission();
-            await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
+            await Navigator.of(context).pushNamed(RouteGenerator.imageCameraPage);
           },
           style: const ButtonStyle(
             side: MaterialStatePropertyAll(BorderSide(width: 1)),

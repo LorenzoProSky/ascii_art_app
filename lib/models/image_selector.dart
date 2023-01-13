@@ -9,4 +9,12 @@ class ImageSelector {
     final path = selectedFile!.path;
     cache.imagePath = path;
   }
+
+  static void takeImage(ImagePathCache cache) async {
+    final picker = ImagePicker();
+    final selectedFile = await picker.pickImage(source: ImageSource.camera);
+
+    final path = selectedFile!.path;
+    cache.imagePath = path;
+  }
 }

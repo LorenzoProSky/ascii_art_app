@@ -9,14 +9,14 @@ import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ImagePage extends StatefulWidget {
-  const ImagePage({super.key});
+class ImageCameraPage extends StatefulWidget {
+  const ImageCameraPage({super.key});
 
   @override
-  State<ImagePage> createState() => _ImagePageState();
+  State<ImageCameraPage> createState() => _ImageCameraPageState();
 }
 
-class _ImagePageState extends State<ImagePage> {
+class _ImageCameraPageState extends State<ImageCameraPage> {
   bool _isAscii = false;
   String? _asciiImage;
   double _sensibility = 1;
@@ -25,7 +25,7 @@ class _ImagePageState extends State<ImagePage> {
   @override
   void initState() {
     super.initState();
-    ImageSelector.selectImage(Provider.of<ImagePathCache>(context, listen: false));
+    ImageSelector.takeImage(Provider.of<ImagePathCache>(context, listen: false));
   }
 
   @override
@@ -121,7 +121,7 @@ class _ImagePageState extends State<ImagePage> {
   Widget _selectImageButton(BuildContext context) {
     return OutlinedButton(
       onPressed: () async {
-        ImageSelector.selectImage(
+        ImageSelector.takeImage(
             Provider.of<ImagePathCache>(context, listen: false));
         _isAscii = false;
       },
@@ -130,7 +130,7 @@ class _ImagePageState extends State<ImagePage> {
         fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
       ),
       child: Text(
-        "Select New Image",
+        "Take New Photo",
         style: Theme.of(context).textTheme.bodyText1,
       ),
     );
