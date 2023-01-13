@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ImagePage extends StatefulWidget {
-  const ImagePage({super.key});
+  final bool needCamera;
+  const ImagePage({super.key, required this.needCamera});
 
   @override
   State<ImagePage> createState() => _ImagePageState();
@@ -25,7 +26,8 @@ class _ImagePageState extends State<ImagePage> {
   @override
   void initState() {
     super.initState();
-    ImageSelector.selectImage(Provider.of<ImagePathCache>(context, listen: false));
+    ImageSelector.selectImage(
+        Provider.of<ImagePathCache>(context, listen: false), widget.needCamera);
   }
 
   @override
@@ -121,16 +123,17 @@ class _ImagePageState extends State<ImagePage> {
   Widget _selectImageButton(BuildContext context) {
     return OutlinedButton(
       onPressed: () async {
-        ImageSelector.selectImage(
-            Provider.of<ImagePathCache>(context, listen: false));
         _isAscii = false;
+        ImageSelector.selectImage(
+            Provider.of<ImagePathCache>(context, listen: false),
+            widget.needCamera);
       },
       style: const ButtonStyle(
         side: MaterialStatePropertyAll(BorderSide(width: 1)),
         fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
       ),
       child: Text(
-        "Select New Image",
+        (widget.needCamera) ? "Take new Photo" : "Select New Image",
         style: Theme.of(context).textTheme.bodyText1,
       ),
     );

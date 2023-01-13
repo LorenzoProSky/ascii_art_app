@@ -1,6 +1,9 @@
+import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/permission_handler.dart';
-import 'package:ascii_app/routes/routes.dart';
+import 'package:ascii_app/routes/image_page.dart';
+import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +21,7 @@ class HomePage extends StatelessWidget {
             _homePageImage(),
             _titleText(context),
             _mediaStoragePermissionAndToImagePageButton(context),
-            _cameraPermissionAndToCameraPageButton(context),
+            _cameraPermissionAndToImagePageButton(context),
           ],
         ),
       ),
@@ -64,10 +67,7 @@ class HomePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         OutlinedButton(
-          onPressed: () async {
-            PermissionHandler.requestMediaStoragePermission();
-            await Navigator.of(context).pushNamed(RouteGenerator.imagePage);
-          },
+          onPressed: () => _permissionsThenToImagePage(context, false),
           style: const ButtonStyle(
             side: MaterialStatePropertyAll(BorderSide(width: 1)),
             fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
@@ -81,14 +81,11 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _cameraPermissionAndToCameraPageButton(BuildContext context) {
+  Widget _cameraPermissionAndToImagePageButton(BuildContext context) {
     return Column(
       children: <Widget>[
         OutlinedButton(
-          onPressed: () async {
-            PermissionHandler.requestCameraPermission();
-            await Navigator.of(context).pushNamed(RouteGenerator.imageCameraPage);
-          },
+          onPressed: () => _permissionsThenToImagePage(context, true),
           style: const ButtonStyle(
             side: MaterialStatePropertyAll(BorderSide(width: 1)),
             fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
@@ -100,5 +97,33 @@ class HomePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _permissionsThenToImagePage(BuildContext context, bool needCamera) async {
+    if (needCamera) {
+      PermissionHandler.requestCameraPermission();
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider<ImagePathCache>(
+            create: (_) => ImagePathCache(),
+            child: const LoadingOverlay(
+              child: ImagePage(needCamera: true),
+            ),
+          ),
+        ),
+      );
+    } else {
+      PermissionHandler.requestMediaStoragePermission();
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider<ImagePathCache>(
+            create: (_) => ImagePathCache(),
+            child: const LoadingOverlay(
+              child: ImagePage(needCamera: false),
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
