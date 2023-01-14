@@ -3,9 +3,20 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   const AppTheme();
-  static ThemeData lightTheme = ThemeData(
-    backgroundColor: AppColor.background,
-    primaryColor: AppColor.background,
+  static ThemeData asciiAppTheme = ThemeData(
+    colorScheme: const ColorScheme(
+      background: AppColor.background,
+      brightness: Brightness.light,
+      error: AppColor.background,
+      onBackground: AppColor.background,
+      onError: AppColor.background,
+      onPrimary: AppColor.textColor,
+      onSecondary: AppColor.background,
+      onSurface: AppColor.background,
+      primary: AppColor.background,
+      secondary: AppColor.deepPurple,
+      surface: AppColor.background,
+    ),
     textTheme: const TextTheme(
       headline1: TextStyle(
         fontFamily: "Roboto",
@@ -25,28 +36,12 @@ class AppTheme {
         color: AppColor.textColor,
       ),
     ),
-
-    cardTheme: const CardTheme(color: AppColor.background),
-    iconTheme: const IconThemeData(color: AppColor.iconColor),
-    bottomAppBarColor: AppColor.background,
-    dividerColor: AppColor.lightGrey,
   );
 
-  static List<BoxShadow> shadow = <BoxShadow>[
-    const BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
-  ];
 
-  static EdgeInsets padding =
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
-  static EdgeInsets hPadding = const EdgeInsets.symmetric(
-    horizontal: 10,
+  // TODO
+  static ButtonStyle buttonStyle = const ButtonStyle(
+    side: MaterialStatePropertyAll(BorderSide(width: 1)),
+    fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
   );
-
-  static double fullWidth(BuildContext context) {
-    return MediaQuery.of(context).size.width;
-  }
-
-  static double fullHeight(BuildContext context) {
-    return MediaQuery.of(context).size.height;
-  }
 }

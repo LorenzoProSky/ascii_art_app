@@ -5,7 +5,7 @@ class ImageSelector {
   static void selectImage(ImagePathCache cache, bool needCamera) async {
     final picker = ImagePicker();
     final XFile? selectedFile;
-    
+
     if (needCamera) {
       selectedFile = await picker.pickImage(source: ImageSource.camera);
     } else {

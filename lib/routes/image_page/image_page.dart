@@ -6,6 +6,7 @@ import 'package:ascii_app/models/asciifier.dart';
 import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
+import 'package:ascii_app/theme/theme.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,15 +29,18 @@ class _ImagePageState extends State<ImagePage> {
   void initState() {
     super.initState();
     ImageSelector.selectImage(
-        Provider.of<ImagePathCache>(context, listen: false), widget.arguments.needCamera);
+        Provider.of<ImagePathCache>(context, listen: false),
+        widget.arguments.needCamera);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
-        padding: const EdgeInsets.all(35.0),
+        padding: const EdgeInsets.all(
+          30.0,
+        ),
         child: Column(
           children: <Widget>[
             _imageArea(context),
@@ -60,7 +64,7 @@ class _ImagePageState extends State<ImagePage> {
           ? FittedBox(
               fit: BoxFit.scaleDown,
               child: InteractiveViewer(
-                panEnabled: true, // Set it to false to prevent panning.
+                panEnabled: true,
                 minScale: 1,
                 maxScale: 50,
                 child: SelectableText(
@@ -69,43 +73,39 @@ class _ImagePageState extends State<ImagePage> {
                 ),
               ),
             )
-          : (Provider.of<ImagePathCache>(context).imagePath !=
-                  "assets/inv_pixel.png")
+          : (Provider.of<ImagePathCache>(context).imagePath != "")
               ? FittedBox(
                   child: Image.file(
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),
                 )
-              : const FittedBox(
-                  child: Image(
-                    image: AssetImage("assets/inv_pixel.png"),
-                  ),
-                ),
+              : const FittedBox(),
     );
   }
 
   Widget _asciifyButton(BuildContext context) {
     return Column(
       children: [
+        // TODO Turn off Asciify button when no image
         OutlinedButton(
           onPressed: () async {
             LoadingOverlay.of(context).show();
             await Future.delayed(const Duration(milliseconds: 400));
+
             var temp = await Asciifier.asciify(
                 Provider.of<ImagePathCache>(context, listen: false).imagePath,
                 _sensibility.toInt(),
                 _charSensibility.toInt());
             _isAscii = true;
+
             await Future.delayed(const Duration(milliseconds: 100));
+            LoadingOverlay.of(context).hide();
+
             setState(() {
               _asciiImage = temp;
             });
-            LoadingOverlay.of(context).hide();
           },
-          style: const ButtonStyle(
-            side: MaterialStatePropertyAll(BorderSide(width: 1)),
-            fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-          ),
+          style: AppTheme.buttonStyle,
           child: Text(
             "ASCIIfy",
             style: Theme.of(context).textTheme.bodyText1,
@@ -129,10 +129,7 @@ class _ImagePageState extends State<ImagePage> {
             Provider.of<ImagePathCache>(context, listen: false),
             widget.arguments.needCamera);
       },
-      style: const ButtonStyle(
-        side: MaterialStatePropertyAll(BorderSide(width: 1)),
-        fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-      ),
+      style: AppTheme.buttonStyle,
       child: Text(
         (widget.arguments.needCamera) ? "Take new Photo" : "Select New Image",
         style: Theme.of(context).textTheme.bodyText1,
@@ -146,7 +143,6 @@ class _ImagePageState extends State<ImagePage> {
       child: Slider(
         min: 1.0,
         max: 100.0,
-        // TODO Max value can't be bigger than the image size
         value: _sensibility,
         divisions: 100,
         label: '${_sensibility.round()}',

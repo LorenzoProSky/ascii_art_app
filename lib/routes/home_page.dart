@@ -1,6 +1,4 @@
-import 'package:ascii_app/models/permission_handler.dart';
-import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
-import 'package:ascii_app/routes/routes.dart';
+import 'package:ascii_app/widgets/home_page_select_button.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: const EdgeInsets.all(
           30.0,
@@ -18,8 +16,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             _homePageImage(),
             _titleText(context),
-            _mediaStoragePermissionAndToImagePageButton(context),
-            _cameraPermissionAndToImagePageButton(context),
+            const HomePageSelectButton(),
           ],
         ),
       ),
@@ -30,17 +27,18 @@ class HomePage extends StatelessWidget {
     return Column(
       children: const <Widget>[
         SizedBox(
-          height: 40,
+          height: 30,
         ),
         SizedBox(
           height: 350,
           width: 380,
           child: Image(
+            // TODO Redo Image
             image: AssetImage("assets/home_image.png"),
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
       ],
     );
@@ -49,57 +47,17 @@ class HomePage extends StatelessWidget {
   Widget _titleText(BuildContext context) {
     return Column(
       children: <Widget>[
+        const SizedBox(
+          height: 10,
+        ),
         Text(
-          "ASCII Art\nImage Converter",
+          // TODO Title
+          "ASCII Art\nConverter",
           style: Theme.of(context).textTheme.headline1,
           textAlign: TextAlign.center,
         ),
         const SizedBox(
           height: 10,
-        ),
-      ],
-    );
-  }
-
-  Widget _mediaStoragePermissionAndToImagePageButton(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        OutlinedButton(
-          onPressed: () async {
-            PermissionHandler.requestMediaStoragePermission();
-            await Navigator.of(context).pushNamed(RouteGenerator.imagePage,
-                arguments: ImagePageArguments(false));
-          },
-          style: const ButtonStyle(
-            side: MaterialStatePropertyAll(BorderSide(width: 1)),
-            fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-          ),
-          child: Text(
-            "Select Image\nfrom Storage",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _cameraPermissionAndToImagePageButton(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        OutlinedButton(
-          onPressed: () async {
-            PermissionHandler.requestCameraPermission();
-            await Navigator.of(context).pushNamed(RouteGenerator.imagePage,
-                arguments: ImagePageArguments(true));
-          },
-          style: const ButtonStyle(
-            side: MaterialStatePropertyAll(BorderSide(width: 1)),
-            fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
-          ),
-          child: Text(
-            "Take Image\nfrom Camera",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
         ),
       ],
     );

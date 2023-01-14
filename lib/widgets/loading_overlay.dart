@@ -39,14 +39,18 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
         if (_isLoading)
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-            child: const Opacity(
+            child: Opacity(
               opacity: 0.8,
-              child: ModalBarrier(dismissible: false, color: Colors.black),
+              child: ModalBarrier(
+                  dismissible: false,
+                  color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
         if (_isLoading)
-          const Center(
-            child: CircularProgressIndicator(color: Colors.white,),
+          Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:ascii_app/models/ascii_characters_brightness.dart';
 import 'package:image/image.dart';
 
 class Asciifier {
+  // TODO Errors
   static Future<String> asciify(
       String path, int sensibility, int charSensibility) async {
     var startImg = decodeImage(File(path).readAsBytesSync());
