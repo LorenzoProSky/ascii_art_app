@@ -14,8 +14,16 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            _homePageImage(),
-            _titleText(context),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                _homePageImage(),
+                _titleText(context),
+              ],
+            ),
+            const SizedBox(
+              height: 40.0,
+            ),
             const HomePageSelectButton(),
           ],
         ),
@@ -23,43 +31,23 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // TODO Redo Image
   Widget _homePageImage() {
-    return Column(
-      children: const <Widget>[
-        SizedBox(
-          height: 30,
-        ),
-        SizedBox(
-          height: 350,
-          width: 380,
-          child: Image(
-            // TODO Redo Image
-            image: AssetImage("assets/home_image.png"),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
+    return const SizedBox(
+      height: 440,
+      width: 440,
+      child: Image(
+        image: AssetImage("assets/home_image.png"),
+      ),
     );
   }
 
+  // TODO Pos Text
   Widget _titleText(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          // TODO Title
-          "ASCII Art\nConverter",
-          style: Theme.of(context).textTheme.headline1,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ],
+    return Text(
+      "ASCII Art Converter",
+      style: Theme.of(context).textTheme.headline1,
+      textAlign: TextAlign.center,
     );
   }
 }

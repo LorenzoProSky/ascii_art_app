@@ -8,12 +8,12 @@ class AppTheme {
       background: AppColor.background,
       brightness: Brightness.light,
       error: AppColor.background,
-      onBackground: AppColor.background,
+      onBackground: AppColor.white,
       onError: AppColor.background,
-      onPrimary: AppColor.textColor,
+      onPrimary: AppColor.black,
       onSecondary: AppColor.background,
       onSurface: AppColor.background,
-      primary: AppColor.background,
+      primary: AppColor.white,
       secondary: AppColor.deepPurple,
       surface: AppColor.background,
     ),
@@ -22,26 +22,19 @@ class AppTheme {
         fontFamily: "Roboto",
         fontWeight: FontWeight.w200,
         fontSize: 38.0,
-        color: AppColor.textColor,
+        color: AppColor.black,
       ),
       bodyText1: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
         fontSize: 18.0,
-        color: AppColor.textColor,
+        color: AppColor.black,
       ),
       bodyText2: TextStyle(
         fontFamily: "Lucida Console",
         letterSpacing: 5,
-        color: AppColor.textColor,
+        color: AppColor.black,
       ),
     ),
-  );
-
-
-  // TODO
-  static ButtonStyle buttonStyle = const ButtonStyle(
-    side: MaterialStatePropertyAll(BorderSide(width: 1)),
-    fixedSize: MaterialStatePropertyAll(Size.fromWidth(200)),
   );
 }

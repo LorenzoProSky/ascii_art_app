@@ -28,7 +28,6 @@ class RouteGenerator {
           ),
         );
       default:
-        // TODO Error
         throw const FormatException("Route not found.");
     }
   }

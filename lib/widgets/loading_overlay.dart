@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class LoadingOverlay extends StatefulWidget {
   const LoadingOverlay({Key? key, required this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget child; // Used to overlay on the widget below
 
   // ignore: library_private_types_in_public_api
   static _LoadingOverlayState of(BuildContext context) {
@@ -38,18 +38,21 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
         widget.child,
         if (_isLoading)
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
             child: Opacity(
-              opacity: 0.8,
+              opacity: 0.75,
               child: ModalBarrier(
-                  dismissible: false,
-                  color: Theme.of(context).colorScheme.onPrimary),
+                dismissible: false,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
           ),
         if (_isLoading)
           Center(
             child: CircularProgressIndicator(
+              strokeWidth: 2.5,
               color: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.primary,
             ),
           ),
       ],

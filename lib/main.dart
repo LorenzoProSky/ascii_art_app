@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const AsciiApp());
 
-// TODO Add comments
+// TODO Error Handling
 
 class AsciiApp extends StatelessWidget {
   const AsciiApp({super.key});

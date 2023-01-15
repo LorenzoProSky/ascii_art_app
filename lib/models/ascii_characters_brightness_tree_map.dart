@@ -1,10 +1,11 @@
 import 'dart:collection';
 
-class AsciiCharactersBrightness {
+class AsciiCharactersBrightnessTreeMap {
+  // TreeMap for range values keys -> Single ch
   SplayTreeMap<double, String> _treeMap = SplayTreeMap();
-  var _keyRange = 1.0;
+  var _keyRange = 35.1; // Full distance between 2 ch
 
-  AsciiCharactersBrightness(int charSensibility) {
+  AsciiCharactersBrightnessTreeMap(int charSensibility) {
     Map<double, String> selectedMap;
     switch (charSensibility) {
       case 2:
@@ -16,6 +17,7 @@ class AsciiCharactersBrightness {
         _keyRange = 2.7;
         break;
       default:
+        // Default MIN Tree Map
         selectedMap = _brightnessCharacterMin;
         _keyRange = 35.1;
         break;
@@ -172,23 +174,23 @@ class AsciiCharactersBrightness {
     4.3: "@",
   };
 
-  int _compare(double mapKey, double externalKey) {
+  // Function used to "create" the ranges of keys
+  int _compare(double mapKey, double externalValue) {
     var halfRange = _keyRange / 2;
-    if (mapKey == 250 &&
-        ((250 - halfRange) <= externalKey && externalKey <= 255)) return 0;
-    if (mapKey == 4.3 &&
-        (0 <= externalKey && externalKey < (4.3 + halfRange))) {
+    if (mapKey == 250 && (externalValue >= (250 - halfRange))) return 0;
+    if (mapKey == 4.3 && (externalValue < (4.3 + halfRange))) {
       return 0;
     }
 
-    var temp = mapKey - externalKey;
-    if (temp <= -halfRange) return 1; // Up
-    if (temp > halfRange) return -1; // Down
+    var temp = mapKey - externalValue;
+    if (temp <= -halfRange) return 1; // Up - Brighther ch
+    if (temp > halfRange) return -1; // Down - Darker ch
 
     return 0;
   }
 
   String brightnessToChar(double input) {
-    return _treeMap[input]!;
+    var output = _treeMap[input];
+    return output ?? " ";
   }
 }

@@ -1,42 +1,54 @@
 import 'dart:io';
 
-import 'package:ascii_app/models/ascii_characters_brightness.dart';
+import 'package:ascii_app/models/ascii_characters_brightness_tree_map.dart';
 import 'package:image/image.dart';
 
 class Asciifier {
-  // TODO Errors
   static Future<String> asciify(
-      String path, int sensibility, int charSensibility) async {
+      String path, int pixelSensibility, int charSensibility) async {
+    // Min value of pixelSensibility = 1
     var startImg = decodeImage(File(path).readAsBytesSync());
-    // Min value of sensibility = 1
-    var chProcessor = AsciiCharactersBrightness(charSensibility);
-    return await _innerAsciify(startImg!, sensibility, chProcessor);
+    var chProcessor = AsciiCharactersBrightnessTreeMap(charSensibility);
+
+    return await _innerAsciify(startImg!, pixelSensibility, chProcessor);
   }
 
-  static Future<String> _innerAsciify(
-      Image startImg, int sens, AsciiCharactersBrightness chProcessor) async {
+  static Future<String> _innerAsciify(Image startImg, int sens,
+      AsciiCharactersBrightnessTreeMap chProcessor) async {
     var imageLineList = <String>[];
+
     for (var yBlocK = 0; yBlocK < startImg.height; yBlocK = yBlocK + sens) {
-      var lineList = <String>[];
+      var lineList = <String>[]; // Each String of the list is a pixel row
 
       for (var xBlock = 0; xBlock < startImg.width; xBlock = xBlock + sens) {
         var sumBlockBright = 0.0;
+        var tempPixelBright = 0.0;
+        // Sum of th brightness of a block of pixels determined by "sens"
         for (var y = 0; y < sens; y++) {
           for (var x = 0; x < sens; x++) {
-            var pixel = startImg.getPixel(x + xBlock, y + yBlocK);
-            var pixelBright = (getRed(pixel) * 0.299) +
-                (getBlue(pixel) * 0.587) +
-                (getGreen(pixel) * 0.114);
-            sumBlockBright = sumBlockBright + pixelBright;
+            try {
+              var pixel = startImg.getPixel(x + xBlock, y + yBlocK);
+              var pixelBright = (getRed(pixel) * 0.299) +
+                  (getBlue(pixel) * 0.587) +
+                  (getGreen(pixel) * 0.114);
+              tempPixelBright = pixelBright;
+              sumBlockBright = sumBlockBright + pixelBright;
+            } catch (e) {
+              sumBlockBright = sumBlockBright + tempPixelBright;
+              continue;
+            }
           }
         }
+        // Average brightness
         var blockBright = sumBlockBright / (sens * sens);
-        lineList.add(chProcessor.brightnessToChar(blockBright));
+        lineList.add(chProcessor.brightnessToChar(blockBright)); // Add ch
       }
-      imageLineList.add(lineList.join(""));
+      // TODO Bug cat for 1-2
+      imageLineList.add(lineList.join("")); // Add the pixel row to the image
     }
 
     var sb = StringBuffer();
+    // Concat every String into one big String separated by new line
     for (var line in imageLineList) {
       sb.write("$line\n");
     }
