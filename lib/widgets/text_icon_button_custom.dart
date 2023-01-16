@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomTextIconButton extends StatelessWidget {
-  const CustomTextIconButton({
+class TextIconButtonCustom extends StatelessWidget {
+  const TextIconButtonCustom({
     Key? key,
     required this.iconData,
     required this.buttonText,

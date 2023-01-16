@@ -6,10 +6,10 @@ import 'package:ascii_app/models/asciifier.dart';
 import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
-import 'package:ascii_app/widgets/custom_icon_button.dart';
-import 'package:ascii_app/widgets/custom_slider.dart';
-import 'package:ascii_app/widgets/custom_text_button.dart';
+import 'package:ascii_app/widgets/icon_button_custom.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
+import 'package:ascii_app/widgets/slider_custom.dart';
+import 'package:ascii_app/widgets/text_button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +46,9 @@ class _ImagePageState extends State<ImagePage> {
         child: Column(
           children: <Widget>[
             _imageArea(context),
+            const SizedBox(
+              height: 20,
+            ),
             Center(
               child: SizedBox(
                 height: 50,
@@ -82,7 +85,7 @@ class _ImagePageState extends State<ImagePage> {
 
   Widget _imageArea(BuildContext context) {
     return SizedBox(
-      height: 480,
+      height: 460,
       width: 580,
       child: (_isAscii)
           ? FittedBox(
@@ -94,12 +97,13 @@ class _ImagePageState extends State<ImagePage> {
                 maxScale: 50,
                 child: SelectableText(
                   _asciiImage!, // Text ASCII Image
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
               ),
             )
           : (Provider.of<ImagePathCache>(context).imagePath != "")
               ? FittedBox(
+                  fit: BoxFit.scaleDown,
                   child: Image.file(
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),
@@ -112,7 +116,7 @@ class _ImagePageState extends State<ImagePage> {
 
   // TODO Turn off Asciify button and sliders when no image
   Widget _asciifyButton(BuildContext context) {
-    return CustomTextButton(
+    return TextButtonCustom(
       buttonText: "ASCIIfy",
       width: 140,
       onTap: () async {
@@ -139,7 +143,7 @@ class _ImagePageState extends State<ImagePage> {
   Widget _selectImageButton(BuildContext context) {
     // Select Image from the Camera or the Storage according to "needCamera"
     return (widget.arguments.needCamera)
-        ? CustomIconButton(
+        ? IconButtonCustom(
             iconData: Icons.camera_alt,
             onTap: () async {
               _isAscii = false;
@@ -148,7 +152,7 @@ class _ImagePageState extends State<ImagePage> {
                   widget.arguments.needCamera);
             },
           )
-        : CustomIconButton(
+        : IconButtonCustom(
             iconData: Icons.photo,
             onTap: () async {
               _isAscii = false;
@@ -160,7 +164,7 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   Widget _sensibilitySlider(BuildContext context) {
-    return CustomSlider(
+    return SliderCustom(
       value: _pixelSensibility,
       onChange: (value) {
         setState(() {
@@ -176,7 +180,7 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   Widget _charSlider(BuildContext context) {
-    return CustomSlider(
+    return SliderCustom(
       value: _charSensibility,
       onChange: (value) {
         setState(() {

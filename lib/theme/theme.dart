@@ -5,37 +5,37 @@ class AppTheme {
   const AppTheme();
   static ThemeData asciiAppTheme = ThemeData(
     colorScheme: const ColorScheme(
-      background: AppColor.background,
       brightness: Brightness.light,
-      error: AppColor.background,
+      background: AppColor.background,
       onBackground: AppColor.white,
-      onError: AppColor.background,
-      onPrimary: AppColor.black,
-      onSecondary: AppColor.background,
-      onSurface: AppColor.background,
       primary: AppColor.white,
+      onPrimary: AppColor.black,
       secondary: AppColor.deepPurple,
+      onSecondary: AppColor.white,
       surface: AppColor.background,
+      onSurface: AppColor.black,
+      error: AppColor.red,
+      onError: AppColor.black,
     ),
     textTheme: const TextTheme(
       headline1: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w200,
-        fontSize: 38.0,
+        fontSize: 40.0,
         color: AppColor.black,
       ),
       bodyText1: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
-        fontSize: 18.0,
+        fontSize: 20.0,
         color: AppColor.black,
       ),
-      bodyText2: TextStyle(
+      subtitle1: TextStyle(
+        // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
         letterSpacing: 5,
         color: AppColor.black,
       ),
     ),
-    
   );
 }

@@ -14,13 +14,7 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                _homePageImage(),
-                _titleText(context),
-              ],
-            ),
+            _homePageImage(),
             const SizedBox(
               height: 40.0,
             ),
@@ -39,15 +33,6 @@ class HomePage extends StatelessWidget {
       child: Image(
         image: AssetImage("assets/home_image.png"),
       ),
-    );
-  }
-
-  // TODO Pos Text
-  Widget _titleText(BuildContext context) {
-    return Text(
-      "ASCII Art Converter",
-      style: Theme.of(context).textTheme.headline1,
-      textAlign: TextAlign.center,
     );
   }
 }

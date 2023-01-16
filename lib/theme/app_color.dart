@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const Color background = Color.fromARGB(255, 245, 245, 245);
+  static const Color background = Color.fromARGB(255, 252, 250, 246);
 
-  static const Color white = Color.fromARGB(255, 255, 255, 255);
-
+  static const Color white = Color.fromRGBO(255, 255, 255, 1);
   static const Color black = Color.fromARGB(255, 10, 10, 10);
 
   static const Color deepPurple = Colors.deepPurple;
   static Color lightPurple = Colors.deepPurple.shade100;
+
+  static const Color red = Colors.red;
 }

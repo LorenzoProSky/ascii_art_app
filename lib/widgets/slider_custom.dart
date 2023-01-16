@@ -1,8 +1,8 @@
 import 'package:ascii_app/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
-class CustomSlider extends StatelessWidget {
-  const CustomSlider({
+class SliderCustom extends StatelessWidget {
+  const SliderCustom({
     Key? key,
     required this.value,
     required this.onChange,
@@ -20,6 +20,7 @@ class CustomSlider extends StatelessWidget {
   final String text;
   final double width;
 
+  // TODO Label inside the circle not above
   @override
   Widget build(BuildContext context) {
     return Center(

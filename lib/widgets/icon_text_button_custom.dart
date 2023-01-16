@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CustomTextButton extends StatelessWidget {
-  const CustomTextButton({
+class IconTextButtonCustom extends StatelessWidget {
+  const IconTextButtonCustom({
     Key? key,
+    required this.iconData,
     required this.buttonText,
     required this.onTap,
     required this.width,
   }) : super(key: key);
+  final IconData iconData;
   final String buttonText;
   final Function() onTap;
   final double width;
@@ -32,6 +34,18 @@ class CustomTextButton extends StatelessWidget {
               ),
               child: Row(
                 children: [
+                  Container(
+                    height: 50.0,
+                    width: 50.0,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    child: Icon(
+                      iconData,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                   Expanded(
                     child: Text(
                       buttonText,
