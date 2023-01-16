@@ -29,7 +29,7 @@ class TextIconButtonCustom extends StatelessWidget {
               height: 50.0,
               width: width,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Row(
@@ -45,12 +45,12 @@ class TextIconButtonCustom extends StatelessWidget {
                     height: 50.0,
                     width: 50.0,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).focusColor,
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Icon(
                       iconData,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).primaryColor,
                     ),
                   )
                 ],

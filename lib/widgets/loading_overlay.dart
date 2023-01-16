@@ -43,7 +43,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
               opacity: 0.75,
               child: ModalBarrier(
                 dismissible: false,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).hintColor,
               ),
             ),
           ),
@@ -51,8 +51,8 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
           Center(
             child: CircularProgressIndicator(
               strokeWidth: 2.5,
-              color: Theme.of(context).colorScheme.secondary,
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).focusColor,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
       ],

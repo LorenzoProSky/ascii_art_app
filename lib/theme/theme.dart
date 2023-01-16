@@ -4,19 +4,10 @@ import 'package:flutter/material.dart';
 class AppTheme {
   const AppTheme();
   static ThemeData asciiAppTheme = ThemeData(
-    colorScheme: const ColorScheme(
-      brightness: Brightness.light,
-      background: AppColor.background,
-      onBackground: AppColor.white,
-      primary: AppColor.white,
-      onPrimary: AppColor.black,
-      secondary: AppColor.deepPurple,
-      onSecondary: AppColor.white,
-      surface: AppColor.background,
-      onSurface: AppColor.black,
-      error: AppColor.red,
-      onError: AppColor.black,
-    ),
+    backgroundColor: AppColor.background,
+    primaryColor: AppColor.white,
+    hintColor: AppColor.black,
+    focusColor: AppColor.deepPurple,
     textTheme: const TextTheme(
       headline1: TextStyle(
         fontFamily: "Roboto",
@@ -36,6 +27,11 @@ class AppTheme {
         letterSpacing: 5,
         color: AppColor.black,
       ),
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: AppColor.black,
+      selectionColor: AppColor.deepPurple.withAlpha(50),
+      selectionHandleColor: AppColor.black,
     ),
   );
 }

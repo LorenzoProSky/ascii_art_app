@@ -38,7 +38,7 @@ class _ImagePageState extends State<ImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(
           30.0,
@@ -103,7 +103,6 @@ class _ImagePageState extends State<ImagePage> {
             )
           : (Provider.of<ImagePathCache>(context).imagePath != "")
               ? FittedBox(
-                  fit: BoxFit.scaleDown,
                   child: Image.file(
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),

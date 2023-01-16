@@ -33,21 +33,22 @@ class SliderCustom extends StatelessWidget {
               data: SliderTheme.of(context).copyWith(
                 trackHeight: 5.0,
                 trackShape: const RoundedRectSliderTrackShape(),
-                activeTrackColor: Theme.of(context).colorScheme.secondary,
-                inactiveTrackColor: AppColor.lightPurple,
+                activeTrackColor: Theme.of(context).focusColor,
+                inactiveTrackColor:
+                    Theme.of(context).focusColor.withAlpha(100),
                 thumbShape: const RoundSliderThumbShape(
                   enabledThumbRadius: 10.0,
                   pressedElevation: 8.0,
                 ),
-                thumbColor: Theme.of(context).colorScheme.primary,
+                thumbColor: Theme.of(context).primaryColor,
                 overlayColor:
-                    Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                    Theme.of(context).focusColor.withOpacity(0.2),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                 tickMarkShape: const RoundSliderTickMarkShape(),
-                activeTickMarkColor: Theme.of(context).colorScheme.primary,
-                inactiveTickMarkColor: Theme.of(context).colorScheme.primary,
+                activeTickMarkColor: Theme.of(context).primaryColor,
+                inactiveTickMarkColor: Theme.of(context).primaryColor,
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor: Theme.of(context).colorScheme.primary,
+                valueIndicatorColor: Theme.of(context).primaryColor,
                 valueIndicatorTextStyle: Theme.of(context).textTheme.bodyText1,
               ),
               child: Slider(

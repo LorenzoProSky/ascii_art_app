@@ -27,7 +27,7 @@ class TextButtonCustom extends StatelessWidget {
               height: 50.0,
               width: width,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Row(
