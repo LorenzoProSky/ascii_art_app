@@ -36,5 +36,6 @@ class AppTheme {
         color: AppColor.black,
       ),
     ),
+    
   );
 }

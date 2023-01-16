@@ -7,6 +7,7 @@ import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
 import 'package:ascii_app/widgets/custom_icon_button.dart';
+import 'package:ascii_app/widgets/custom_slider.dart';
 import 'package:ascii_app/widgets/custom_text_button.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
@@ -61,11 +62,15 @@ class _ImagePageState extends State<ImagePage> {
               ),
             ),
             const SizedBox(
-              height: 15,
+              height: 20,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _sensibilitySlider(context),
+                const SizedBox(
+                  width: 10,
+                ),
                 _charSlider(context),
               ],
             ),
@@ -99,7 +104,9 @@ class _ImagePageState extends State<ImagePage> {
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),
                 )
-              : const FittedBox(), // TODO PlaceHolder Image (better than empty)
+              : const FittedBox(
+                  // TODO PlaceHolder Image (better than empty)
+                  ),
     );
   }
 
@@ -130,7 +137,7 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   Widget _selectImageButton(BuildContext context) {
-    // Select an Image from the Camera or the Storage according to "needCamera"
+    // Select Image from the Camera or the Storage according to "needCamera"
     return (widget.arguments.needCamera)
         ? CustomIconButton(
             iconData: Icons.camera_alt,
@@ -152,41 +159,35 @@ class _ImagePageState extends State<ImagePage> {
           );
   }
 
-  // TODO
   Widget _sensibilitySlider(BuildContext context) {
-    return SizedBox(
-      width: 170,
-      child: Slider(
-        min: 1.0,
-        max: 100.0,
-        value: _pixelSensibility,
-        divisions: 100,
-        label: '${_pixelSensibility.round()}',
-        onChanged: (value) {
-          setState(() {
-            _pixelSensibility = value;
-          });
-        },
-      ),
+    return CustomSlider(
+      value: _pixelSensibility,
+      onChange: (value) {
+        setState(() {
+          _pixelSensibility = value;
+        });
+      },
+      min: 1.0,
+      max: 100.0,
+      divs: 100,
+      text: "Pixel Sensibility",
+      width: 150,
     );
   }
 
-  // TODO
   Widget _charSlider(BuildContext context) {
-    return SizedBox(
-      width: 170,
-      child: Slider(
-        min: 1.0,
-        max: 3.0,
-        value: _charSensibility,
-        divisions: 2,
-        label: '${_charSensibility.round()}',
-        onChanged: (value) {
-          setState(() {
-            _charSensibility = value;
-          });
-        },
-      ),
+    return CustomSlider(
+      value: _charSensibility,
+      onChange: (value) {
+        setState(() {
+          _charSensibility = value;
+        });
+      },
+      min: 1.0,
+      max: 3.0,
+      divs: 2,
+      text: "Char Sensibility",
+      width: 150,
     );
   }
 }

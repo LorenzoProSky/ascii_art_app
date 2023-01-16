@@ -8,4 +8,5 @@ class AppColor {
   static const Color black = Color.fromARGB(255, 10, 10, 10);
 
   static const Color deepPurple = Colors.deepPurple;
+  static Color lightPurple = Colors.deepPurple.shade100;
 }
