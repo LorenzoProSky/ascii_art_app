@@ -107,13 +107,10 @@ class _ImagePageState extends State<ImagePage> {
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),
                 )
-              : const FittedBox(
-                  // TODO PlaceHolder Image (better than empty)
-                  ),
+              : const FittedBox(),
     );
   }
 
-  // TODO Turn off Asciify button and sliders when no image
   Widget _asciifyButton(BuildContext context) {
     return TextButtonCustom(
       buttonText: "ASCIIfy",
@@ -129,7 +126,7 @@ class _ImagePageState extends State<ImagePage> {
             _charSensibility.toInt());
         _isAscii = true;
 
-        await Future.delayed(const Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 250));
         LoadingOverlay.of(context).hide();
 
         setState(() {

@@ -25,14 +25,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // TODO Redo Image
   Widget _homePageImage() {
-    return const SizedBox(
+    return const Image(
+      image: AssetImage("assets/home_image.png"),
       height: 440,
       width: 440,
-      child: Image(
-        image: AssetImage("assets/home_image.png"),
-      ),
+      fit: BoxFit.fitHeight,
     );
   }
 }

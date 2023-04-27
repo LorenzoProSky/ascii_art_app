@@ -1,7 +1,6 @@
 import 'package:ascii_app/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
-// TODO Changing text
 class TextSliderCustom extends StatelessWidget {
   const TextSliderCustom({Key? key}) : super(key: key);
 

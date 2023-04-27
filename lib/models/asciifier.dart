@@ -10,7 +10,7 @@ class Asciifier {
     var startImg = decodeImage(File(path).readAsBytesSync());
     var chProcessor = AsciiCharactersBrightnessTreeMap(charSensibility);
 
-    return await _innerAsciify(startImg!, pixelSensibility, chProcessor);
+    return _innerAsciify(startImg!, pixelSensibility, chProcessor);
   }
 
   static Future<String> _innerAsciify(Image startImg, int sens,
@@ -43,7 +43,6 @@ class Asciifier {
         var blockBright = sumBlockBright / (sens * sens);
         lineList.add(chProcessor.brightnessToChar(blockBright)); // Add ch
       }
-      // TODO Bug cat for 1-2
       imageLineList.add(lineList.join("")); // Add the pixel row to the image
     }
 
