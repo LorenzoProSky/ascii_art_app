@@ -7,30 +7,44 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(
-          30.0,
-        ),
-        child: Column(
-          children: <Widget>[
-            _homePageImage(),
-            const SizedBox(
-              height: 40.0,
-            ),
-            const HomePageSelectButton(),
-          ],
-        ),
-      ),
-    );
-  }
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final screenWidth = constraints.maxWidth;
+          final screenHeight = constraints.maxHeight;
 
-  Widget _homePageImage() {
-    return const Image(
-      image: AssetImage("assets/home_image.png"),
-      height: 440,
-      width: 440,
-      fit: BoxFit.fitHeight,
+          return Center(
+            child: Container(
+              width: screenWidth,
+              height: screenHeight,
+              color: Theme.of(context).canvasColor,
+              child: Padding(
+                padding: EdgeInsets.all(
+                  (screenHeight * 0.045 < 30) ? screenHeight * 0.045 : 30,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Image(
+                      image: const AssetImage("assets/home_image.png"),
+                      width: (screenWidth * 0.65 < 440) ? screenWidth * 0.65 : 440,
+                      height: (screenHeight * 0.65 < 440) ? screenHeight * 0.65 : 440,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    SizedBox(
+                      height: (screenHeight * 0.05 < 40) ? screenHeight * 0.05 : 40,
+                    ),
+                    HomePageSelectButton(
+                      width:
+                          (screenWidth * 0.6 < 315) ? screenWidth * 0.6 : 315,
+                      height: 
+                      (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

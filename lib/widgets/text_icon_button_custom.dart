@@ -38,7 +38,7 @@ class TextIconButtonCustom extends StatelessWidget {
                     child: Text(
                       buttonText,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                   Container(

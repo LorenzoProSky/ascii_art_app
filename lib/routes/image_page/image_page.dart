@@ -38,55 +38,105 @@ class _ImagePageState extends State<ImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(
-          30.0,
-        ),
-        child: Column(
-          children: <Widget>[
-            _imageArea(context),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: SizedBox(
-                height: 50,
-                width: 200,
-                child: Row(
-                  children: [
-                    _asciifyButton(context),
-                    const SizedBox(
-                      width: 10,
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final screenWidth = constraints.maxWidth;
+          final screenHeight = constraints.maxHeight;
+
+          return Center(
+            child: Container(
+              width: screenWidth,
+              height: screenHeight,
+              color: Theme.of(context).canvasColor,
+              child: Padding(
+                padding: EdgeInsets.all(
+                  (screenHeight * 0.045 < 30) ? screenHeight * 0.045 : 30,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    _imageArea(
+                        context,
+                        (screenWidth * 0.8 < 580) ? screenWidth * 0.8 : 580,
+                        (screenHeight * 0.68 < 460)
+                            ? screenHeight * 0.68
+                            : 460),
+                    SizedBox(
+                      height: (screenHeight * 0.035 < 20)
+                          ? screenHeight * 0.035
+                          : 20,
                     ),
-                    _selectImageButton(context),
+                    Center(
+                      child: SizedBox(
+                        width:
+                            (screenWidth * 0.5 < 200) ? screenWidth * 0.5 : 200,
+                        height: (screenHeight * 0.05 < 50)
+                            ? screenHeight * 0.05
+                            : 50,
+                        child: Row(
+                          children: [
+                            _asciifyButton(
+                                context,
+                                (screenWidth * 0.3 < 150)
+                                    ? screenWidth * 0.3
+                                    : 150,
+                                (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50),
+                            SizedBox(
+                              width: (screenWidth * 0.025 < 10)
+                                  ? screenHeight * 0.025
+                                  : 10,
+                            ),
+                            _selectImageButton(
+                                context,
+                                (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: (screenHeight * 0.035 < 20)
+                          ? screenHeight * 0.035
+                          : 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _sensibilitySlider(
+                            context,
+                            (screenWidth * 0.3 < 150) ? screenWidth * 0.3 : 150,
+                            (screenHeight * 0.045 < 30)
+                                ? screenHeight * 0.045
+                                : 30),
+                        SizedBox(
+                          height: (screenHeight * 0.025 < 10)
+                              ? screenHeight * 0.025
+                              : 10,
+                        ),
+                        _charSlider(
+                            context,
+                            (screenWidth * 0.3 < 150) ? screenWidth * 0.3 : 150,
+                            (screenHeight * 0.045 < 30)
+                                ? screenHeight * 0.045
+                                : 30),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _sensibilitySlider(context),
-                const SizedBox(
-                  width: 10,
-                ),
-                _charSlider(context),
-              ],
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Widget _imageArea(BuildContext context) {
+  Widget _imageArea(BuildContext context, double width, double height) {
     return SizedBox(
-      height: 460,
-      width: 580,
+      width: width,
+      height: height,
       child: (_isAscii)
           ? FittedBox(
               fit: BoxFit.scaleDown,
@@ -97,7 +147,7 @@ class _ImagePageState extends State<ImagePage> {
                 maxScale: 50,
                 child: SelectableText(
                   _asciiImage!, // Text ASCII Image
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             )
@@ -111,10 +161,11 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
-  Widget _asciifyButton(BuildContext context) {
+  Widget _asciifyButton(BuildContext context, double width, double height) {
     return TextButtonCustom(
       buttonText: "ASCIIfy",
-      width: 140,
+      width: width,
+      height: height,
       onTap: () async {
         LoadingOverlay.of(context).show();
         await Future.delayed(const Duration(milliseconds: 250));
@@ -136,11 +187,12 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
-  Widget _selectImageButton(BuildContext context) {
+  Widget _selectImageButton(BuildContext context, double size) {
     // Select Image from the Camera or the Storage according to "needCamera"
     return (widget.arguments.needCamera)
         ? IconButtonCustom(
             iconData: Icons.camera_alt,
+            size: size,
             onTap: () async {
               _isAscii = false;
               ImageSelector.selectImage(
@@ -150,6 +202,7 @@ class _ImagePageState extends State<ImagePage> {
           )
         : IconButtonCustom(
             iconData: Icons.photo,
+            size: size,
             onTap: () async {
               _isAscii = false;
               ImageSelector.selectImage(
@@ -159,7 +212,7 @@ class _ImagePageState extends State<ImagePage> {
           );
   }
 
-  Widget _sensibilitySlider(BuildContext context) {
+  Widget _sensibilitySlider(BuildContext context, double width, double height) {
     return SliderCustom(
       value: _pixelSensibility,
       onChange: (value) {
@@ -171,11 +224,12 @@ class _ImagePageState extends State<ImagePage> {
       max: 100.0,
       divs: 100,
       text: "Pixel Sensibility",
-      width: 150,
+      width: width,
+      height: height,
     );
   }
 
-  Widget _charSlider(BuildContext context) {
+  Widget _charSlider(BuildContext context, double width, double height) {
     return SliderCustom(
       value: _charSensibility,
       onChange: (value) {
@@ -187,7 +241,8 @@ class _ImagePageState extends State<ImagePage> {
       max: 3.0,
       divs: 2,
       text: "Char Sensibility",
-      width: 150,
+      width: width,
+      height: height,
     );
   }
 }

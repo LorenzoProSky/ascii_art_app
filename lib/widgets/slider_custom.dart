@@ -10,6 +10,7 @@ class SliderCustom extends StatelessWidget {
     required this.divs,
     required this.text,
     required this.width,
+    required this.height,
   }) : super(key: key);
   final double value;
   final Function(double) onChange;
@@ -18,36 +19,35 @@ class SliderCustom extends StatelessWidget {
   final int divs;
   final String text;
   final double width;
-  
+  final double height;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
           SizedBox(
-            height: 30,
             width: width,
+            height: height,
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
-                trackHeight: 5.0,
+                trackHeight: 5.0 * height / 22,
                 trackShape: const RoundedRectSliderTrackShape(),
                 activeTrackColor: Theme.of(context).focusColor,
-                inactiveTrackColor:
-                    Theme.of(context).focusColor.withAlpha(100),
-                thumbShape: const RoundSliderThumbShape(
-                  enabledThumbRadius: 10.0,
+                inactiveTrackColor: Theme.of(context).focusColor.withAlpha(100),
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: 10.0 * height / 28,
                   pressedElevation: 8.0,
                 ),
                 thumbColor: Theme.of(context).primaryColor,
-                overlayColor:
-                    Theme.of(context).focusColor.withOpacity(0.2),
+                overlayColor: Theme.of(context).focusColor.withOpacity(0.2),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor: Theme.of(context).primaryColor,
-                valueIndicatorTextStyle: Theme.of(context).textTheme.bodyText1,
+                valueIndicatorColor: Theme.of(context).focusColor.withAlpha(150),
+                valueIndicatorTextStyle: Theme.of(context).textTheme.bodyLarge,
               ),
               child: Slider(
                 min: min,
@@ -59,10 +59,17 @@ class SliderCustom extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText1,
+          SizedBox(
+            width: width,
+            height: height,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
           ),
         ],
       ),

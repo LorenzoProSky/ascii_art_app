@@ -28,7 +28,6 @@ linter:
     - empty_statements
     - hash_and_equals
     - implementation_imports
-    - invariant_booleans
     - library_names
     - library_prefixes
     - list_remove_unrelated_type

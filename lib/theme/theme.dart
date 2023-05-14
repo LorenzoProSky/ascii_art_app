@@ -3,25 +3,19 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   const AppTheme();
-  static ThemeData asciiAppTheme = ThemeData(
-    backgroundColor: AppColor.background,
+  static ThemeData lightTheme = ThemeData(
+    canvasColor: AppColor.background,
     primaryColor: AppColor.white,
     hintColor: AppColor.black,
     focusColor: AppColor.deepPurple,
     textTheme: const TextTheme(
-      headline1: TextStyle(
-        fontFamily: "Roboto",
-        fontWeight: FontWeight.w200,
-        fontSize: 40.0,
-        color: AppColor.black,
-      ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
         fontSize: 20.0,
         color: AppColor.black,
       ),
-      subtitle1: TextStyle(
+      displayLarge: TextStyle(
         // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
         letterSpacing: 5,
