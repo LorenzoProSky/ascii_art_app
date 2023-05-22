@@ -3,9 +3,10 @@
 import 'dart:io';
 
 import 'package:ascii_app/models/asciifier.dart';
-import 'package:ascii_app/models/image_path_cache.dart';
 import 'package:ascii_app/models/image_selector.dart';
+import 'package:ascii_app/models/notifiers/image_path_cache.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
+import 'package:ascii_app/widgets/back_button_custom.dart';
 import 'package:ascii_app/widgets/icon_button_custom.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:ascii_app/widgets/slider_custom.dart';
@@ -68,7 +69,7 @@ class _ImagePageState extends State<ImagePage> {
                     Center(
                       child: SizedBox(
                         width:
-                            (screenWidth * 0.5 < 200) ? screenWidth * 0.5 : 200,
+                            (screenWidth * 0.6 < 235) ? screenWidth * 0.6 : 235,
                         height: (screenHeight * 0.05 < 50)
                             ? screenHeight * 0.05
                             : 50,
@@ -76,7 +77,7 @@ class _ImagePageState extends State<ImagePage> {
                           children: [
                             _asciifyButton(
                                 context,
-                                (screenWidth * 0.3 < 150)
+                                (screenWidth * 0.3 < 100)
                                     ? screenWidth * 0.3
                                     : 150,
                                 (screenHeight * 0.05 < 50)
@@ -90,6 +91,15 @@ class _ImagePageState extends State<ImagePage> {
                             _selectImageButton(
                                 context,
                                 (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50),
+                            SizedBox(
+                              width: (screenWidth * 0.025 < 10)
+                                  ? screenHeight * 0.025
+                                  : 10,
+                            ),
+                            BackButtonCustom(
+                                size: (screenHeight * 0.05 < 50)
                                     ? screenHeight * 0.05
                                     : 50),
                           ],

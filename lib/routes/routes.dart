@@ -1,4 +1,4 @@
-import 'package:ascii_app/models/image_path_cache.dart';
+import 'package:ascii_app/models/notifiers/image_path_cache.dart';
 import 'package:ascii_app/routes/home_page.dart';
 import 'package:ascii_app/routes/image_page/image_page.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
