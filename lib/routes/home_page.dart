@@ -1,6 +1,9 @@
 import 'package:ascii_app/models/notifiers/theme_notifier.dart';
+import 'package:ascii_app/routes/about_page.dart';
+import 'package:ascii_app/routes/routes.dart';
 import 'package:ascii_app/theme/theme.dart';
 import 'package:ascii_app/widgets/back_button_custom.dart';
+import 'package:ascii_app/widgets/basic/text_icon_button_custom.dart';
 import 'package:ascii_app/widgets/home_page_select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +62,17 @@ class HomePage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        TextIconButtonCustom(
+                          iconData: Icons.info_outline_rounded,
+                          buttonText: "About",
+                          onTap: () async {
+                            await Navigator.of(context)
+                                .pushNamed(RouteGenerator.aboutPage);
+                          },
+                          width: (screenWidth * 0.3 < 160)
+                              ? screenWidth * 0.3
+                              : 160,
+                        ),
                         Consumer<ThemeProvider>(
                           builder: (context, themeProvider, _) {
                             var currentIcon =

@@ -7,10 +7,10 @@ import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/models/notifiers/image_path_cache.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
 import 'package:ascii_app/widgets/back_button_custom.dart';
-import 'package:ascii_app/widgets/icon_button_custom.dart';
+import 'package:ascii_app/widgets/basic/icon_button_custom.dart';
+import 'package:ascii_app/widgets/basic/text_button_custom.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:ascii_app/widgets/slider_custom.dart';
-import 'package:ascii_app/widgets/text_button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
