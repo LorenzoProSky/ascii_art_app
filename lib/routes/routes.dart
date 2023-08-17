@@ -1,5 +1,4 @@
 import 'package:ascii_app/models/notifiers/image_path_cache.dart';
-import 'package:ascii_app/routes/about_page.dart';
 import 'package:ascii_app/routes/home_page.dart';
 import 'package:ascii_app/routes/image_page/image_page.dart';
 import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
@@ -10,7 +9,6 @@ import 'package:provider/provider.dart';
 class RouteGenerator {
   static const String homePage = "/";
   static const String imagePage = "/imagePage";
-  static const String aboutPage = "/aboutPage";
 
   RouteGenerator._();
 
@@ -28,10 +26,6 @@ class RouteGenerator {
               child: ImagePage(settings.arguments as ImagePageArguments),
             ),
           ),
-        );
-      case aboutPage:
-        return MaterialPageRoute(
-          builder: (_) => const AboutPage(),
         );
       default:
         throw const FormatException("Route not found.");

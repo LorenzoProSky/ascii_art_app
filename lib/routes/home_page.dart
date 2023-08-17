@@ -1,9 +1,6 @@
 import 'package:ascii_app/models/notifiers/theme_notifier.dart';
-import 'package:ascii_app/routes/about_page.dart';
-import 'package:ascii_app/routes/routes.dart';
 import 'package:ascii_app/theme/theme.dart';
 import 'package:ascii_app/widgets/back_button_custom.dart';
-import 'package:ascii_app/widgets/basic/text_icon_button_custom.dart';
 import 'package:ascii_app/widgets/home_page_select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,79 +25,88 @@ class HomePage extends StatelessWidget {
               color: Theme.of(context).canvasColor,
               child: Padding(
                 padding: EdgeInsets.all(
-                  (screenHeight * 0.045 < 30) ? screenHeight * 0.045 : 30,
+                  (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
                 ),
-                child: Column(
-                  children: <Widget>[
-                    Image(
-                      image: (themeProvider.getTheme().brightness ==
-                              Brightness.dark)
-                          ? const AssetImage("assets/home_image_dark.png")
-                          : const AssetImage("assets/home_image_dark.png"),
-                      width:
-                          (screenWidth * 0.65 < 440) ? screenWidth * 0.65 : 440,
-                      height: (screenHeight * 0.65 < 440)
-                          ? screenHeight * 0.65
-                          : 440,
-                      fit: BoxFit.fitHeight,
-                    ),
-                    SizedBox(
-                      height:
-                          (screenHeight * 0.05 < 40) ? screenHeight * 0.05 : 40,
-                    ),
-                    HomePageSelectButton(
-                      width:
-                          (screenWidth * 0.6 < 315) ? screenWidth * 0.6 : 315,
-                      height:
-                          (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
-                    ),
-                    SizedBox(
-                      height: (screenHeight * 0.025 < 20)
-                          ? screenHeight * 0.025
-                          : 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Column(
                       children: [
-                        TextIconButtonCustom(
-                          iconData: Icons.info_outline_rounded,
-                          buttonText: "About",
-                          onTap: () async {
-                            await Navigator.of(context)
-                                .pushNamed(RouteGenerator.aboutPage);
-                          },
-                          width: (screenWidth * 0.3 < 160)
-                              ? screenWidth * 0.3
-                              : 160,
+                        SizedBox(
+                          height: (screenHeight * 0.03 < 30)
+                              ? screenHeight * 0.03
+                              : 30,
                         ),
-                        Consumer<ThemeProvider>(
-                          builder: (context, themeProvider, _) {
-                            var currentIcon =
-                                themeProvider.getTheme().brightness ==
-                                        Brightness.dark
-                                    ? Icons.dark_mode_outlined
-                                    : Icons.light_mode_outlined;
-
-                            return IconButton(
-                              icon: Icon(currentIcon),
-                              iconSize: (screenHeight * 0.05 < 50)
-                                  ? screenHeight * 0.05
-                                  : 50,
-                              onPressed: () {
-                                if (themeProvider.getTheme().brightness ==
-                                    Brightness.dark) {
-                                  themeProvider.setTheme(AppTheme.lightTheme);
-                                } else {
-                                  themeProvider.setTheme(AppTheme.darkTheme);
-                                }
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            BackButtonCustom(
+                                size: (screenHeight * 0.045 < 45)
+                                    ? screenHeight * 0.045
+                                    : 45),
+                            SizedBox(
+                              width: screenWidth * 0.62,
+                            ),
+                            Consumer<ThemeProvider>(
+                              builder: (context, themeProvider, _) {
+                                var currentIcon =
+                                    themeProvider.getTheme().brightness ==
+                                            Brightness.dark
+                                        ? Icons.dark_mode_outlined
+                                        : Icons.light_mode_outlined;
+                                return IconButton(
+                                  icon: Icon(currentIcon),
+                                  iconSize: (screenHeight * 0.045 < 45)
+                                      ? screenHeight * 0.045
+                                      : 45,
+                                  onPressed: () {
+                                    if (themeProvider.getTheme().brightness ==
+                                        Brightness.dark) {
+                                      themeProvider
+                                          .setTheme(AppTheme.lightTheme);
+                                    } else {
+                                      themeProvider
+                                          .setTheme(AppTheme.darkTheme);
+                                    }
+                                  },
+                                );
                               },
-                            );
-                          },
+                            ),
+                          ],
                         ),
-                        BackButtonCustom(
-                            size: (screenHeight * 0.05 < 50)
-                                ? screenHeight * 0.05
-                                : 50),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: (screenHeight * 0.08 < 80)
+                              ? screenHeight * 0.08
+                              : 80,
+                        ),
+                        Image(
+                          image: (themeProvider.getTheme().brightness ==
+                                  Brightness.dark)
+                              ? const AssetImage("assets/home_image_dark.png")
+                              : const AssetImage("assets/home_image_dark.png"),
+                          width: (screenWidth < 500) ? screenWidth : 500,
+                          height: (screenHeight * 0.65 < 450)
+                              ? screenHeight * 0.65
+                              : 450,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(
+                          height: (screenHeight * 0.05 < 50)
+                              ? screenHeight * 0.05
+                              : 50,
+                        ),
+                        HomePageSelectButton(
+                          width: (screenWidth * 0.75 < 350)
+                              ? screenWidth * 0.75
+                              : 350,
+                          height: (screenHeight * 0.055 < 55)
+                              ? screenHeight * 0.055
+                              : 55,
+                        ),
                       ],
                     ),
                   ],
