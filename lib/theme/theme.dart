@@ -8,7 +8,7 @@ class AppTheme {
     canvasColor: AppColor.lightBackground,
     primaryColor: AppColor.white,
     hintColor: AppColor.black,
-    focusColor: AppColor.deepPurple,
+    focusColor: AppColor.darkPurple,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
         fontFamily: "Roboto",
@@ -25,23 +25,23 @@ class AppTheme {
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.black,
-      selectionColor: AppColor.deepPurple.withAlpha(50),
+      selectionColor: AppColor.darkPurple.withAlpha(50),
       selectionHandleColor: AppColor.black,
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
+  static ThemeData darkTheme = ThemeData( //TODO
     brightness: Brightness.dark,
     canvasColor: AppColor.darkBackground,
-    primaryColor: AppColor.white,
-    hintColor: AppColor.black,
-    focusColor: AppColor.deepPurple,
+    primaryColor: AppColor.black,
+    hintColor: AppColor.white,
+    focusColor: AppColor.lightPurple,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
         fontSize: 20.0,
-        color: AppColor.black,
+        color: AppColor.white,
       ),
       displayLarge: TextStyle(
         // TextTheme for the ASCII Art
@@ -52,7 +52,7 @@ class AppTheme {
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.white,
-      selectionColor: AppColor.deepPurple.withAlpha(50),
+      selectionColor: AppColor.lightPurple.withAlpha(50),
       selectionHandleColor: AppColor.white,
     ),
   );

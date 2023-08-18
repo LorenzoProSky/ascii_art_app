@@ -94,8 +94,8 @@ class _ImagePageState extends State<ImagePage> {
                                     ? screenHeight * 0.05
                                     : 50),
                             SizedBox(
-                              width: (screenWidth * 0.025 < 10)
-                                  ? screenHeight * 0.025
+                              width: (screenWidth * 0.008 < 10)
+                                  ? screenHeight * 0.008
                                   : 10,
                             ),
                             BackButtonCustom(

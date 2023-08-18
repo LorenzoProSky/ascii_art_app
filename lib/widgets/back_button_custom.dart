@@ -9,20 +9,13 @@ class BackButtonCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.transparent,
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-          width: size * 0.08,
-        ),
-      ),
       child: IconButton(
         icon: const Icon(Icons.arrow_back_ios_rounded),
-        iconSize: (size * 0.6 < 30) ? size * 0.6 : 30,
+        iconSize: size * 0.75,
+        color: Theme.of(context).hintColor,
         padding: EdgeInsets.zero,
         onPressed: () => Navigator.pop(context),
       ),

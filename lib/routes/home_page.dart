@@ -52,8 +52,8 @@ class HomePage extends StatelessWidget {
                                 var currentIcon =
                                     themeProvider.getTheme().brightness ==
                                             Brightness.dark
-                                        ? Icons.dark_mode_outlined
-                                        : Icons.light_mode_outlined;
+                                        ? Icons.dark_mode
+                                        : Icons.light_mode;
                                 return IconButton(
                                   icon: Icon(currentIcon),
                                   iconSize: (screenHeight * 0.045 < 45)
@@ -86,8 +86,8 @@ class HomePage extends StatelessWidget {
                         Image(
                           image: (themeProvider.getTheme().brightness ==
                                   Brightness.dark)
-                              ? const AssetImage("assets/home_image_dark.png")
-                              : const AssetImage("assets/home_image_dark.png"),
+                              ? const AssetImage("assets/home_image_dark.png") //TODO
+                              : const AssetImage("assets/home_image_light.png"),
                           width: (screenWidth < 500) ? screenWidth : 500,
                           height: (screenHeight * 0.65 < 450)
                               ? screenHeight * 0.65
@@ -95,9 +95,9 @@ class HomePage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         SizedBox(
-                          height: (screenHeight * 0.05 < 50)
-                              ? screenHeight * 0.05
-                              : 50,
+                          height: (screenHeight * 0.04 < 40)
+                              ? screenHeight * 0.04
+                              : 40,
                         ),
                         HomePageSelectButton(
                           width: (screenWidth * 0.75 < 350)

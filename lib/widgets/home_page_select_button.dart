@@ -20,6 +20,7 @@ class HomePageSelectButton extends StatelessWidget {
         height: height,
         child: Material(
           elevation: 8.0,
+          shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(height),
           child: Stack(
             alignment: AlignmentDirectional.center,
@@ -46,7 +47,7 @@ class HomePageSelectButton extends StatelessWidget {
                   _mediaStoragePermissionAndToImagePageButton(context),
                   SizedBox(
                     width: 1,
-                    height: height * 0.8,
+                    height: height * 0.7,
                     child: VerticalDivider(
                       width: 1,
                       thickness: 1,
@@ -90,11 +91,11 @@ class HomePageSelectButton extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: width * 0.11,
+              width: width * 0.1,
               height: height,
               child: Icon(
                 Icons.photo,
-                size: height * 0.63,
+                size: height * 0.6,
                 color: Theme.of(context).primaryColor,
               ),
             ),
@@ -121,11 +122,11 @@ class HomePageSelectButton extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: width * 0.11,
+              width: width * 0.1,
               height: height,
               child: Icon(
                 Icons.camera_alt,
-                size: height * 0.63,
+                size: height * 0.6,
                 color: Theme.of(context).primaryColor,
               ),
             ),
