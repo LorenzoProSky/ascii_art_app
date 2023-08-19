@@ -19,7 +19,7 @@ class AppTheme {
       displayLarge: TextStyle(
         // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
-        letterSpacing: 5,
+        letterSpacing: 8,
         color: AppColor.black,
       ),
     ),

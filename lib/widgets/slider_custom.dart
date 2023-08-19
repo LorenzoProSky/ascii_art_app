@@ -8,7 +8,6 @@ class SliderCustom extends StatelessWidget {
     required this.min,
     required this.max,
     required this.divs,
-    required this.text,
     required this.width,
     required this.height,
   }) : super(key: key);
@@ -17,7 +16,6 @@ class SliderCustom extends StatelessWidget {
   final double min;
   final double max;
   final int divs;
-  final String text;
   final double width;
   final double height;
 
@@ -46,7 +44,8 @@ class SliderCustom extends StatelessWidget {
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor: Theme.of(context).focusColor.withAlpha(150),
+                valueIndicatorColor:
+                    Theme.of(context).focusColor.withAlpha(150),
                 valueIndicatorTextStyle: Theme.of(context).textTheme.bodyLarge,
               ),
               child: Slider(
@@ -56,18 +55,6 @@ class SliderCustom extends StatelessWidget {
                 divisions: divs,
                 label: '${value.round()}',
                 onChanged: onChange,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: width,
-            height: height,
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ),

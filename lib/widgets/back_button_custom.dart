@@ -16,6 +16,7 @@ class BackButtonCustom extends StatelessWidget {
         icon: const Icon(Icons.arrow_back_ios_rounded),
         iconSize: size * 0.75,
         color: Theme.of(context).hintColor,
+        highlightColor: Theme.of(context).focusColor,
         padding: EdgeInsets.zero,
         onPressed: () => Navigator.pop(context),
       ),
