@@ -43,7 +43,7 @@ class SliderCustom extends StatelessWidget {
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
-                valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+                valueIndicatorShape: const PaddleSliderValueIndicatorShape(), //TODO
                 valueIndicatorColor:
                     Theme.of(context).focusColor.withAlpha(150),
                 valueIndicatorTextStyle: Theme.of(context).textTheme.bodyLarge,

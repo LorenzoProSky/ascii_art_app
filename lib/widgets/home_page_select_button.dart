@@ -95,7 +95,7 @@ class HomePageSelectButton extends StatelessWidget {
               height: height,
               child: Icon(
                 Icons.photo,
-                size: height * 0.6,
+                size: height * 0.5,
                 color: Theme.of(context).primaryColor,
               ),
             ),
@@ -126,7 +126,7 @@ class HomePageSelectButton extends StatelessWidget {
               height: height,
               child: Icon(
                 Icons.camera_alt,
-                size: height * 0.6,
+                size: height * 0.5,
                 color: Theme.of(context).primaryColor,
               ),
             ),

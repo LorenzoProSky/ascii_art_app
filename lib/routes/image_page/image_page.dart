@@ -51,19 +51,24 @@ class _ImagePageState extends State<ImagePage> {
               color: Theme.of(context).canvasColor,
               child: Padding(
                 padding: EdgeInsets.all(
-                  (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
+                  (screenHeight * 0.03 < 30) ? screenHeight * 0.03 : 30,
                 ),
                 child: Column(
                   children: <Widget>[
+                    SizedBox(
+                      height: (screenHeight * 0.55 < 55)
+                          ? screenHeight * 0.55
+                          : 55,
+                    ),
                     _imageArea(
                       context,
                       (screenWidth < 500) ? screenWidth : 500,
                       (screenHeight * 0.65 < 450) ? screenHeight * 0.65 : 450,
                     ),
                     SizedBox(
-                      height: (screenHeight * 0.045 < 45)
-                          ? screenHeight * 0.045
-                          : 45,
+                      height: (screenHeight * 0.4 < 40)
+                          ? screenHeight * 0.4
+                          : 40,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -74,29 +79,29 @@ class _ImagePageState extends State<ImagePage> {
                           (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
                         ),
                         SizedBox(
-                          width: (screenWidth * 0.01 < 10)
-                              ? screenHeight * 0.01
-                              : 10,
+                          width: (screenWidth * 0.005 < 5)
+                              ? screenHeight * 0.005
+                              : 5,
                         ),
                         _selectImageButton(
                           context,
                           (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
                         ),
                         SizedBox(
-                          width: (screenWidth * 0.02 < 20)
-                              ? screenHeight * 0.02
-                              : 20,
+                          width: (screenWidth * 0.04 < 40)
+                              ? screenHeight * 0.04
+                              : 40,
                         ),
                         BackButtonCustom(
-                          size: (screenHeight * 0.05 < 50)
-                              ? screenHeight * 0.05
-                              : 50,
+                          size: (screenHeight * 0.045 < 45)
+                              ? screenHeight * 0.045
+                              : 45,
                         ),
                       ],
                     ),
                     SizedBox(
                       height:
-                          (screenHeight * 0.03 < 30) ? screenHeight * 0.03 : 30,
+                          (screenHeight * 0.06 < 60) ? screenHeight * 0.06 : 60,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +145,8 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   Widget _imageArea(BuildContext context, double width, double height) {
-    return SizedBox( //TODO
+    return SizedBox(
+      //TODO
       width: width,
       height: height,
       child: (_isAscii)

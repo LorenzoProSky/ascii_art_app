@@ -32,7 +32,7 @@ class IconButtonCustom extends StatelessWidget {
               ),
               child: Icon(
                 iconData,
-                size: size * 0.65,
+                size: size * 0.55,
                 color: Theme.of(context).primaryColor,
               ),
             ),

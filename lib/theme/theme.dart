@@ -13,7 +13,7 @@ class AppTheme {
       bodyLarge: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
-        fontSize: 20.0,
+        fontSize: 18.0,
         color: AppColor.black,
       ),
       displayLarge: TextStyle(
@@ -40,13 +40,13 @@ class AppTheme {
       bodyLarge: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
-        fontSize: 20.0,
+        fontSize: 18.0,
         color: AppColor.white,
       ),
       displayLarge: TextStyle(
         // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
-        letterSpacing: 5,
+        letterSpacing: 8,
         color: AppColor.white,
       ),
     ),

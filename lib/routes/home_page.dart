@@ -1,6 +1,7 @@
 import 'package:ascii_app/models/notifiers/theme_notifier.dart';
 import 'package:ascii_app/theme/theme.dart';
 import 'package:ascii_app/widgets/back_button_custom.dart';
+import 'package:ascii_app/widgets/exit_button_custom.dart';
 import 'package:ascii_app/widgets/home_page_select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
               color: Theme.of(context).canvasColor,
               child: Padding(
                 padding: EdgeInsets.all(
-                  (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
+                  (screenHeight * 0.03 < 30) ? screenHeight * 0.03 : 30,
                 ),
                 child: Stack(
                   clipBehavior: Clip.none,
@@ -40,12 +41,12 @@ class HomePage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            BackButtonCustom(
-                                size: (screenHeight * 0.045 < 45)
-                                    ? screenHeight * 0.045
-                                    : 45),
+                            ExitButtonCustom(
+                                size: (screenHeight * 0.04 < 40)
+                                    ? screenHeight * 0.04
+                                    : 40),
                             SizedBox(
-                              width: screenWidth * 0.62,
+                              width: screenWidth * 0.65,
                             ),
                             Consumer<ThemeProvider>(
                               builder: (context, themeProvider, _) {
@@ -56,9 +57,9 @@ class HomePage extends StatelessWidget {
                                         : Icons.light_mode;
                                 return IconButton(
                                   icon: Icon(currentIcon),
-                                  iconSize: (screenHeight * 0.045 < 45)
-                                      ? screenHeight * 0.045
-                                      : 45,
+                                  iconSize: (screenHeight * 0.04 < 40)
+                                      ? screenHeight * 0.04
+                                      : 40,
                                   onPressed: () {
                                     if (themeProvider.getTheme().brightness ==
                                         Brightness.dark) {
@@ -79,9 +80,9 @@ class HomePage extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         SizedBox(
-                          height: (screenHeight * 0.08 < 80)
-                              ? screenHeight * 0.08
-                              : 80,
+                          height: (screenHeight * 0.12 < 110)
+                              ? screenHeight * 0.12
+                              : 110,
                         ),
                         Image(
                           image: (themeProvider.getTheme().brightness ==
@@ -89,23 +90,23 @@ class HomePage extends StatelessWidget {
                               ? const AssetImage("assets/home_image_dark.png") //TODO
                               : const AssetImage("assets/home_image_light.png"),
                           width: (screenWidth < 500) ? screenWidth : 500,
-                          height: (screenHeight * 0.65 < 450)
-                              ? screenHeight * 0.65
-                              : 450,
+                          height: (screenHeight * 0.62 < 420)
+                              ? screenHeight * 0.62
+                              : 420,
                           fit: BoxFit.cover,
                         ),
                         SizedBox(
-                          height: (screenHeight * 0.04 < 40)
-                              ? screenHeight * 0.04
-                              : 40,
+                          height: (screenHeight * 0.045 < 45)
+                              ? screenHeight * 0.045
+                              : 45,
                         ),
                         HomePageSelectButton(
-                          width: (screenWidth * 0.75 < 350)
-                              ? screenWidth * 0.75
-                              : 350,
-                          height: (screenHeight * 0.055 < 55)
-                              ? screenHeight * 0.055
-                              : 55,
+                          width: (screenWidth * 0.8 < 380)
+                              ? screenWidth * 0.8
+                              : 380,
+                          height: (screenHeight * 0.05 < 50)
+                              ? screenHeight * 0.05
+                              : 50,
                         ),
                       ],
                     ),
