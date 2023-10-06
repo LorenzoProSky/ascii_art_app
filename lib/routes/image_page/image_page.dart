@@ -53,86 +53,110 @@ class _ImagePageState extends State<ImagePage> {
                 padding: EdgeInsets.all(
                   (screenHeight * 0.03 < 30) ? screenHeight * 0.03 : 30,
                 ),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: (screenHeight * 0.55 < 55)
-                          ? screenHeight * 0.55
-                          : 55,
-                    ),
-                    _imageArea(
-                      context,
-                      (screenWidth < 500) ? screenWidth : 500,
-                      (screenHeight * 0.65 < 450) ? screenHeight * 0.65 : 450,
-                    ),
-                    SizedBox(
-                      height: (screenHeight * 0.4 < 40)
-                          ? screenHeight * 0.4
-                          : 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Column(
                       children: [
-                        _asciifyButton(
+                        SizedBox(
+                          height: (screenHeight * 0.03 < 30)
+                              ? screenHeight * 0.03
+                              : 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            BackButtonCustom(
+                                size: (screenHeight * 0.04 < 40)
+                                    ? screenHeight * 0.04
+                                    : 40),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: (screenHeight * 0.12 < 110)
+                              ? screenHeight * 0.12
+                              : 110,
+                        ),
+                        _imageArea(
                           context,
-                          (screenWidth * 0.4 < 150) ? screenWidth * 0.4 : 150,
-                          (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
+                          (screenWidth < 500) ? screenWidth : 500,
+                          (screenHeight * 0.62 < 420)
+                              ? screenHeight * 0.62
+                              : 420,
                         ),
                         SizedBox(
-                          width: (screenWidth * 0.005 < 5)
-                              ? screenHeight * 0.005
-                              : 5,
-                        ),
-                        _selectImageButton(
-                          context,
-                          (screenHeight * 0.05 < 50) ? screenHeight * 0.05 : 50,
-                        ),
-                        SizedBox(
-                          width: (screenWidth * 0.04 < 40)
-                              ? screenHeight * 0.04
+                          height: (screenHeight * 0.4 < 40)
+                              ? screenHeight * 0.4
                               : 40,
                         ),
-                        BackButtonCustom(
-                          size: (screenHeight * 0.045 < 45)
-                              ? screenHeight * 0.045
-                              : 45,
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _asciifyButton(
+                                context,
+                                (screenWidth * 0.4 < 150)
+                                    ? screenWidth * 0.4
+                                    : 150,
+                                (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50,
+                              ),
+                              SizedBox(
+                                width: (screenWidth * 0.005 < 5)
+                                    ? screenHeight * 0.005
+                                    : 5,
+                              ),
+                              _selectImageButton(
+                                context,
+                                (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50,
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height:
-                          (screenHeight * 0.06 < 60) ? screenHeight * 0.06 : 60,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _sensibilitySlider(
-                            context,
-                            (screenWidth * 0.35 < 135)
-                                ? screenWidth * 0.35
-                                : 135,
-                            (screenHeight * 0.045 < 45)
-                                ? screenHeight * 0.045
-                                : 45),
                         SizedBox(
-                          width: (screenWidth * 0.01 < 10)
-                              ? screenWidth * 0.01
-                              : 10,
+                          height: (screenHeight * 0.06 < 60)
+                              ? screenHeight * 0.06
+                              : 60,
                         ),
-                        _charSlider(
-                            context,
-                            (screenWidth * 0.35 < 135)
-                                ? screenWidth * 0.35
-                                : 135,
-                            (screenHeight * 0.045 < 45)
-                                ? screenHeight * 0.045
-                                : 45),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _sensibilitySlider(
+                                context,
+                                (screenWidth * 0.35 < 135)
+                                    ? screenWidth * 0.35
+                                    : 135,
+                                (screenHeight * 0.045 < 45)
+                                    ? screenHeight * 0.045
+                                    : 45),
+                            SizedBox(
+                              width: (screenWidth * 0.01 < 10)
+                                  ? screenWidth * 0.01
+                                  : 10,
+                            ),
+                            _charSlider(
+                                context,
+                                (screenWidth * 0.35 < 135)
+                                    ? screenWidth * 0.35
+                                    : 135,
+                                (screenHeight * 0.045 < 45)
+                                    ? screenHeight * 0.045
+                                    : 45),
+                          ],
+                        ),
+                        _slidersText(
+                          context,
+                          screenWidth,
+                          screenHeight,
+                        ),
                       ],
-                    ),
-                    _slidersText(
-                      context,
-                      screenWidth,
-                      screenHeight,
                     ),
                   ],
                 ),
@@ -146,12 +170,11 @@ class _ImagePageState extends State<ImagePage> {
 
   Widget _imageArea(BuildContext context, double width, double height) {
     return SizedBox(
-      //TODO
       width: width,
       height: height,
       child: (_isAscii)
           ? FittedBox(
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.contain,
               child: InteractiveViewer(
                 // Zoomable
                 panEnabled: true,
@@ -159,17 +182,24 @@ class _ImagePageState extends State<ImagePage> {
                 maxScale: 50,
                 child: SelectableText(
                   _asciiImage!, // Text ASCII Image
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.displayLarge, //TODO
                 ),
               ),
             )
           : (Provider.of<ImagePathCache>(context).imagePath != "")
               ? FittedBox(
+                  fit: BoxFit.contain,
                   child: Image.file(
                     File(Provider.of<ImagePathCache>(context).imagePath),
                   ),
                 )
-              : const FittedBox(),
+              : Center(
+                  child: Text(
+                    "- Select an Image to ASCIIfy -",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
     );
   }
 
@@ -180,7 +210,7 @@ class _ImagePageState extends State<ImagePage> {
       height: height,
       onTap: () async {
         LoadingOverlay.of(context).show();
-        await Future.delayed(const Duration(milliseconds: 250));
+        await Future.delayed(const Duration(milliseconds: 100));
 
         // Asciify the image into an ASCII image text
         var temp = await Asciifier.asciify(
@@ -189,13 +219,14 @@ class _ImagePageState extends State<ImagePage> {
             _charSensibility.toInt());
         _isAscii = true;
 
-        await Future.delayed(const Duration(milliseconds: 250));
+        await Future.delayed(const Duration(milliseconds: 100));
         LoadingOverlay.of(context).hide();
 
         setState(() {
           _asciiImage = temp;
         });
       },
+      isActive: (Provider.of<ImagePathCache>(context).imagePath != ""),
     );
   }
 
@@ -233,10 +264,11 @@ class _ImagePageState extends State<ImagePage> {
         });
       },
       min: 1.0,
-      max: 100.0,
-      divs: 100,
+      max: 10.0,
+      divs: 9,
       width: width,
       height: height,
+      boo: (Provider.of<ImagePathCache>(context).imagePath != ""),
     );
   }
 
@@ -253,6 +285,7 @@ class _ImagePageState extends State<ImagePage> {
       divs: 2,
       width: width,
       height: height,
+      boo: (Provider.of<ImagePathCache>(context).imagePath != ""),
     );
   }
 

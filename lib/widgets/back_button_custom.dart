@@ -11,10 +11,10 @@ class BackButtonCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: size,
-      height: size,
+      height: size * 1.5,
       child: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_rounded),
-        iconSize: size * 0.75,
+        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        iconSize: size * 0.7,
         color: Theme.of(context).hintColor,
         highlightColor: Theme.of(context).focusColor,
         padding: EdgeInsets.zero,

@@ -10,7 +10,9 @@ class SliderCustom extends StatelessWidget {
     required this.divs,
     required this.width,
     required this.height,
+    required this.boo,
   }) : super(key: key);
+
   final double value;
   final Function(double) onChange;
   final double min;
@@ -18,6 +20,7 @@ class SliderCustom extends StatelessWidget {
   final int divs;
   final double width;
   final double height;
+  final bool boo;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class SliderCustom extends StatelessWidget {
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
-                valueIndicatorShape: const PaddleSliderValueIndicatorShape(), //TODO
+                valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
                 valueIndicatorColor:
                     Theme.of(context).focusColor.withAlpha(150),
                 valueIndicatorTextStyle: Theme.of(context).textTheme.bodyLarge,
@@ -54,7 +57,7 @@ class SliderCustom extends StatelessWidget {
                 value: value,
                 divisions: divs,
                 label: '${value.round()}',
-                onChanged: onChange,
+                onChanged: boo ? onChange : null,
               ),
             ),
           ),

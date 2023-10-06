@@ -1,6 +1,5 @@
 import 'package:ascii_app/models/notifiers/theme_notifier.dart';
 import 'package:ascii_app/theme/theme.dart';
-import 'package:ascii_app/widgets/back_button_custom.dart';
 import 'package:ascii_app/widgets/exit_button_custom.dart';
 import 'package:ascii_app/widgets/home_page_select_button.dart';
 import 'package:flutter/material.dart';
@@ -96,9 +95,9 @@ class HomePage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         SizedBox(
-                          height: (screenHeight * 0.045 < 45)
-                              ? screenHeight * 0.045
-                              : 45,
+                          height: (screenHeight * 0.052 < 52)
+                              ? screenHeight * 0.052
+                              : 52,
                         ),
                         HomePageSelectButton(
                           width: (screenWidth * 0.8 < 380)

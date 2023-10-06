@@ -7,11 +7,14 @@ class TextButtonCustom extends StatelessWidget {
     required this.onTap,
     required this.width,
     required this.height,
+    required this.isActive,
   }) : super(key: key);
+
   final String buttonText;
   final Function() onTap;
   final double width;
   final double height;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class TextButtonCustom extends StatelessWidget {
           elevation: 8.0,
           borderRadius: BorderRadius.circular(height),
           child: InkWell(
-            onTap: onTap,
+            onTap: isActive ? onTap : null,
             borderRadius: BorderRadius.circular(height),
             child: Container(
               height: height,
