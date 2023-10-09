@@ -175,14 +175,14 @@ class _ImagePageState extends State<ImagePage> {
       child: (_isAscii)
           ? FittedBox(
               fit: BoxFit.contain,
-              child: InteractiveViewer(
+              child: InteractiveViewer( // TODO return to scale 1 when asciifying again
                 // Zoomable
                 panEnabled: true,
                 minScale: 1,
                 maxScale: 50,
-                child: SelectableText(
+                child: SelectableText( //TODO copy
                   _asciiImage!, // Text ASCII Image
-                  style: Theme.of(context).textTheme.displayLarge, //TODO
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             )
@@ -197,7 +197,7 @@ class _ImagePageState extends State<ImagePage> {
                   child: Text(
                     "- Select an Image to ASCIIfy -",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
     );
@@ -264,11 +264,11 @@ class _ImagePageState extends State<ImagePage> {
         });
       },
       min: 1.0,
-      max: 10.0,
-      divs: 9,
+      max: 50.0,
+      divs: 49,
       width: width,
       height: height,
-      boo: (Provider.of<ImagePathCache>(context).imagePath != ""),
+      isActive: (Provider.of<ImagePathCache>(context).imagePath != ""),
     );
   }
 
@@ -285,7 +285,7 @@ class _ImagePageState extends State<ImagePage> {
       divs: 2,
       width: width,
       height: height,
-      boo: (Provider.of<ImagePathCache>(context).imagePath != ""),
+      isActive: (Provider.of<ImagePathCache>(context).imagePath != ""),
     );
   }
 
@@ -299,7 +299,7 @@ class _ImagePageState extends State<ImagePage> {
           child: Text(
             "Pixel",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         SizedBox(
@@ -311,7 +311,7 @@ class _ImagePageState extends State<ImagePage> {
           child: Text(
             "Sensibility",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         SizedBox(
@@ -323,7 +323,7 @@ class _ImagePageState extends State<ImagePage> {
           child: Text(
             "Char",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ],

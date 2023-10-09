@@ -10,7 +10,7 @@ class SliderCustom extends StatelessWidget {
     required this.divs,
     required this.width,
     required this.height,
-    required this.boo,
+    required this.isActive,
   }) : super(key: key);
 
   final double value;
@@ -20,7 +20,7 @@ class SliderCustom extends StatelessWidget {
   final int divs;
   final double width;
   final double height;
-  final bool boo;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class SliderCustom extends StatelessWidget {
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
                 valueIndicatorColor:
                     Theme.of(context).focusColor.withAlpha(150),
-                valueIndicatorTextStyle: Theme.of(context).textTheme.bodyLarge,
+                valueIndicatorTextStyle: Theme.of(context).textTheme.bodyMedium,
               ),
               child: Slider(
                 min: min,
@@ -57,7 +57,7 @@ class SliderCustom extends StatelessWidget {
                 value: value,
                 divisions: divs,
                 label: '${value.round()}',
-                onChanged: boo ? onChange : null,
+                onChanged: isActive ? onChange : null,
               ),
             ),
           ),

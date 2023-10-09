@@ -17,10 +17,10 @@ class Asciifier {
       AsciiCharactersBrightnessTreeMap chProcessor) async {
     var imageLineList = <String>[];
 
-    for (var yBlocK = 0; yBlocK < startImg.height; yBlocK = yBlocK + sens) {
+    for (var yBlocK = 0; yBlocK < startImg.height; yBlocK += sens) {
       var lineList = <String>[]; // Each String of the list is a pixel row
 
-      for (var xBlock = 0; xBlock < startImg.width; xBlock = xBlock + sens) {
+      for (var xBlock = 0; xBlock < startImg.width; xBlock += sens) {
         var sumBlockBright = 0.0;
         var tempPixelBright = 0.0;
         // Sum of th brightness of a block of pixels determined by "sens"
@@ -41,8 +41,14 @@ class Asciifier {
         }
         // Average brightness
         var blockBright = sumBlockBright / (sens * sens);
-        lineList.add(chProcessor.brightnessToChar(blockBright)); // Add ch
+        if (imageLineList.isNotEmpty &&
+            imageLineList.first.length >= lineList.length) {
+          lineList.add(chProcessor.brightnessToChar(blockBright)); // Add ch
+        } else if (imageLineList.isEmpty) {
+          lineList.add(chProcessor.brightnessToChar(blockBright));
+        }
       }
+      // TODO
       imageLineList.add(lineList.join("")); // Add the pixel row to the image
     }
 

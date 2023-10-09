@@ -16,28 +16,40 @@ class AppTheme {
         fontSize: 18.0,
         color: AppColor.black,
       ),
+      bodyMedium: TextStyle(
+        fontFamily: "Roboto",
+        fontWeight: FontWeight.w300,
+        fontSize: 18.0,
+        color: AppColor.black,
+      ),
       displayLarge: TextStyle(
         // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
-        letterSpacing: 8,
+        letterSpacing: 50,
         color: AppColor.black,
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.black,
-      selectionColor: AppColor.darkPurple.withAlpha(50),
-      selectionHandleColor: AppColor.black,
+      selectionColor: AppColor.darkPurple.withAlpha(150),
+      selectionHandleColor: AppColor.lightPurple,
     ),
   );
 
-  static ThemeData darkTheme = ThemeData( //TODO
+  static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     canvasColor: AppColor.darkBackground,
-    primaryColor: AppColor.black,
+    primaryColor: AppColor.whiteOff,
     hintColor: AppColor.white,
-    focusColor: AppColor.lightPurple,
+    focusColor: AppColor.darkPurple,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
+        fontFamily: "Roboto",
+        fontWeight: FontWeight.w300,
+        fontSize: 18.0,
+        color: AppColor.black,
+      ),
+      bodyMedium: TextStyle(
         fontFamily: "Roboto",
         fontWeight: FontWeight.w300,
         fontSize: 18.0,
@@ -46,14 +58,14 @@ class AppTheme {
       displayLarge: TextStyle(
         // TextTheme for the ASCII Art
         fontFamily: "Lucida Console",
-        letterSpacing: 8,
+        letterSpacing: 50,
         color: AppColor.white,
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.white,
-      selectionColor: AppColor.lightPurple.withAlpha(50),
-      selectionHandleColor: AppColor.white,
+      selectionColor: AppColor.lightPurple.withAlpha(150),
+      selectionHandleColor: AppColor.darkPurple,
     ),
   );
 }

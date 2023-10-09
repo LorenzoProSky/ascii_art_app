@@ -19,6 +19,7 @@ class IconButtonCustom extends StatelessWidget {
         width: size,
         child: Material(
           elevation: 8.0,
+          shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(size),
           child: InkWell(
             onTap: onTap,

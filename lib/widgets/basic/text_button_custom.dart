@@ -24,6 +24,7 @@ class TextButtonCustom extends StatelessWidget {
         width: width,
         child: Material(
           elevation: 8.0,
+          shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(height),
           child: InkWell(
             onTap: isActive ? onTap : null,
