@@ -175,12 +175,12 @@ class _ImagePageState extends State<ImagePage> {
       child: (_isAscii)
           ? FittedBox(
               fit: BoxFit.contain,
-              child: InteractiveViewer( // TODO return to scale 1 when asciifying again
+              child: InteractiveViewer(
                 // Zoomable
                 panEnabled: true,
                 minScale: 1,
                 maxScale: 50,
-                child: SelectableText( //TODO copy
+                child: SelectableText( //TODO copy button bigger
                   _asciiImage!, // Text ASCII Image
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
@@ -264,8 +264,8 @@ class _ImagePageState extends State<ImagePage> {
         });
       },
       min: 1.0,
-      max: 50.0,
-      divs: 49,
+      max: 30.0,
+      divs: 29,
       width: width,
       height: height,
       isActive: (Provider.of<ImagePathCache>(context).imagePath != ""),

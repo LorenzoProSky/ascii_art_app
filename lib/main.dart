@@ -18,6 +18,7 @@ class AsciiApp extends StatelessWidget {
     return MaterialApp(
       title: "ASCII Art Converter App",
       theme: Provider.of<ThemeProvider>(context).getTheme(),
+      themeMode: ThemeMode.light,
       initialRoute: RouteGenerator.homePage,
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,

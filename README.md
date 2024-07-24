@@ -1,16 +1,27 @@
-# ascii_app
+# ASCII Art Converter App
 
-A new Flutter project.
+Polished minimal mobile app (for Android and iOS) developed in Flutter, which converts images from the device storage and camera into ASCII art, with various formatting options.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Image selection: Users can choose images from their device storage or capture new ones using the camera.
+- ASCII art conversion: The app converts the selected image into ASCII art using various formatting options.
+- Formatting options: Users can customize the ASCII art output by adjusting the following parameters: pixels conversion size and character set.
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To install and run the ASCII Art Converter App, follow these steps:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository: `git clone https://github.com/your-username/ascii_app.git`
+2. Navigate to the project directory: `cd ascii_app`
+3. Install dependencies: `flutter pub get`
+4. Run the app: `flutter run`
+
+Make sure you have Flutter and Dart installed on your machine before running the app.
+
+## Screenshots
+
+Here are some screenshots of the ASCII Art Converter App in action:
+
+![Screenshot 1]
+![Screenshot 2]

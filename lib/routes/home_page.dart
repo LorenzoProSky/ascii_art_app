@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                         Image(
                           image: (themeProvider.getTheme().brightness ==
                                   Brightness.dark)
-                              ? const AssetImage("assets/home_image_dark.png") //TODO
+                              ? const AssetImage("assets/home_image_dark.png")
                               : const AssetImage("assets/home_image_light.png"),
                           width: (screenWidth < 500) ? screenWidth : 500,
                           height: (screenHeight * 0.62 < 420)

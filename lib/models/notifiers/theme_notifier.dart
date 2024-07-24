@@ -4,13 +4,7 @@ import 'package:flutter/material.dart';
 class ThemeProvider with ChangeNotifier {
   ThemeData _themeData = AppTheme.lightTheme;
 
-  ThemeProvider() {
-    final brightness = WidgetsBinding.instance.window.platformBrightness;
-
-    _themeData = brightness == Brightness.dark
-        ? AppTheme.darkTheme
-        : AppTheme.lightTheme;
-  }
+  ThemeProvider();
 
   ThemeData getTheme() => _themeData;
 
