@@ -1,3 +1,4 @@
+import 'package:ascii_app/widgets/slider_track_shape_custom.dart';
 import 'package:flutter/material.dart';
 
 class SliderCustom extends StatelessWidget {
@@ -40,16 +41,19 @@ class SliderCustom extends StatelessWidget {
                   enabledThumbRadius: 10.0 * height / 28,
                   pressedElevation: 8.0,
                 ),
-                thumbColor: Theme.of(context).primaryColor,
+                thumbColor: Theme.of(context).focusColor,
                 overlayColor: Theme.of(context).focusColor.withOpacity(0.2),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
-                valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor:
-                    Theme.of(context).focusColor.withAlpha(150),
-                valueIndicatorTextStyle: Theme.of(context).textTheme.bodyMedium,
+                valueIndicatorShape: CircleWithTextThumbShape (
+                  text: value.round().toString(),
+                  textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16,
+                  ),
+                ),
               ),
               child: Slider(
                 min: min,

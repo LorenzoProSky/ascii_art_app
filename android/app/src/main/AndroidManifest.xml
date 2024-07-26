@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
    <application
-        android:label="ascii_app"
+        android:label="ASCII Art Converter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

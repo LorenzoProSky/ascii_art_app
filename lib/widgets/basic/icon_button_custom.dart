@@ -6,10 +6,12 @@ class IconButtonCustom extends StatelessWidget {
     required this.iconData,
     required this.onTap,
     required this.size,
+    required this.isActive,
   }) : super(key: key);
   final IconData iconData;
   final Function() onTap;
   final double size;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class IconButtonCustom extends StatelessWidget {
           shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(size),
           child: InkWell(
-            onTap: onTap,
+            onTap: isActive ? onTap : null,
             borderRadius: BorderRadius.circular(size),
             child: Container(
               height: size,

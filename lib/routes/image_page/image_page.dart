@@ -12,6 +12,7 @@ import 'package:ascii_app/widgets/basic/text_button_custom.dart';
 import 'package:ascii_app/widgets/loading_overlay.dart';
 import 'package:ascii_app/widgets/slider_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ImagePage extends StatefulWidget {
@@ -107,6 +108,17 @@ class _ImagePageState extends State<ImagePage> {
                                     : 50,
                               ),
                               SizedBox(
+                                width: (screenWidth * 0.01 < 10)
+                                    ? screenHeight * 0.01
+                                    : 10,
+                              ),
+                              _copyButton(
+                                context,
+                                (screenHeight * 0.05 < 50)
+                                    ? screenHeight * 0.05
+                                    : 50,
+                              ),
+                              SizedBox(
                                 width: (screenWidth * 0.005 < 5)
                                     ? screenHeight * 0.005
                                     : 5,
@@ -121,9 +133,9 @@ class _ImagePageState extends State<ImagePage> {
                           ),
                         ),
                         SizedBox(
-                          height: (screenHeight * 0.06 < 60)
-                              ? screenHeight * 0.06
-                              : 60,
+                          height: (screenHeight * 0.025 < 25)
+                              ? screenHeight * 0.025
+                              : 25,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -180,7 +192,7 @@ class _ImagePageState extends State<ImagePage> {
                 panEnabled: true,
                 minScale: 1,
                 maxScale: 50,
-                child: SelectableText( //TODO copy button bigger
+                child: Text(
                   _asciiImage!, // Text ASCII Image
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
@@ -242,6 +254,7 @@ class _ImagePageState extends State<ImagePage> {
                   Provider.of<ImagePathCache>(context, listen: false),
                   widget.arguments.needCamera);
             },
+            isActive: true,
           )
         : IconButtonCustom(
             iconData: Icons.photo,
@@ -252,7 +265,36 @@ class _ImagePageState extends State<ImagePage> {
                   Provider.of<ImagePathCache>(context, listen: false),
                   widget.arguments.needCamera);
             },
+            isActive: true,
           );
+  }
+
+  Widget _copyButton(BuildContext context, double size) {
+    return IconButtonCustom(
+      iconData: Icons.copy,
+      size: size,
+      onTap: () {
+        Clipboard.setData(ClipboardData(text: _asciiImage!));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: SizedBox(
+              height: size / 2,
+              child: Text(
+                'Copied to clipboard',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16,
+                    ),
+              ),
+            ),
+            backgroundColor: Theme.of(context).focusColor,
+            duration: const Duration(milliseconds: 1000),
+          ),
+        );
+      },
+      isActive: _isAscii,
+    );
   }
 
   Widget _sensibilitySlider(BuildContext context, double width, double height) {
@@ -264,8 +306,8 @@ class _ImagePageState extends State<ImagePage> {
         });
       },
       min: 1.0,
-      max: 30.0,
-      divs: 29,
+      max: 20.0,
+      divs: 19,
       width: width,
       height: height,
       isActive: (Provider.of<ImagePathCache>(context).imagePath != ""),

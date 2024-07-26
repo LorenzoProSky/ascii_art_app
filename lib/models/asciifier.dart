@@ -28,9 +28,9 @@ class Asciifier {
           for (var x = 0; x < sens; x++) {
             try {
               var pixel = startImg.getPixel(x + xBlock, y + yBlock);
-              var pixelBright = (getRed(pixel) * 0.299) +
-                  (getBlue(pixel) * 0.587) +
-                  (getGreen(pixel) * 0.114);
+              var pixelBright = (pixel.r * 0.299) +
+                  (pixel.b * 0.587) +
+                  (pixel.g * 0.114);
               tempPixelBright = pixelBright;
               sumBlockBright = sumBlockBright + pixelBright;
             } catch (e) {

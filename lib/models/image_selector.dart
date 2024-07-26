@@ -9,16 +9,16 @@ class ImageSelector {
     if (needCamera) {
       selectedFile = await picker.pickImage(
           source: ImageSource.camera,
-          maxWidth: 1000,
-          maxHeight: 1000,
-          imageQuality: 50,
+          maxWidth: 800,
+          maxHeight: 800,
+          imageQuality: 75,
           requestFullMetadata: false);
     } else {
       selectedFile = await picker.pickImage(
           source: ImageSource.gallery,
-          maxWidth: 1000,
-          maxHeight: 1000,
-          imageQuality: 50,
+          maxWidth: 800,
+          maxHeight: 800,
+          imageQuality: 75,
           requestFullMetadata: false);
     }
 
