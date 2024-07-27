@@ -11,15 +11,18 @@ Polished minimal mobile app (for *Android* and *iOS*) developed in *Flutter*, wh
 
 ## Screenshots
 
-Here are some screenshots of the ASCII Art Converter App in action:
+Here are some screenshots* of the ASCII Art Converter App in action:
 
-![Home Screen] (screenshots/home_screen.jpg)
-![Ascii Art] (screenshots/ascii_art.jpg)
-![Copying to Clipboard] (screenshots/copy_to_clipboard.jpg)
-![Pixel Sensitivity] (screenshots/pixel_sensitivity.jpg)
-![From the Camera] (screenshots/from_camera.jpg)
-![Light Theme] (screenshots/light_theme.jpg)
-![Dark Theme] (screenshots/dark_theme.jpg)
+![Home Screen](screenshots/home_screen.jpg)
+![Ascii Art](screenshots/ascii_art.jpg)
+![Copying to Clipboard](screenshots/copy_to_clipboard.jpg)
+![Pixel Sensitivity](screenshots/pixel_sensitivity.jpg)
+![Zooming](screenshots/zoom.jpg)
+![From the Camera](screenshots/from_camera.jpg)
+![Light Theme](screenshots/light_theme.jpg)
+![Dark Theme](screenshots/dark_theme.jpg)
+
+*The screenshots have been compressed, the actual app has a higher quality and resolution.
 
 ## Installation
 
@@ -33,7 +36,7 @@ To install and run the ASCII Art Converter App, follow these steps:
 
 Make sure you have Flutter and Dart installed on your machine before running the app.
 
-# Possible Additions
+## Possible Additions
 
 - *Color formatting option*: allow users to convert images into colored ASCII art.
 - *Screenshots*: add a feature to automatically take screenshots of the ASCII art.
