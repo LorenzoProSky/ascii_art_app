@@ -1,4 +1,4 @@
-import 'package:ascii_app/widgets/slider_track_shape_custom.dart';
+import 'package:ascii_app/widgets/slider_value_indicator_shape_custom.dart';
 import 'package:flutter/material.dart';
 
 class SliderCustom extends StatelessWidget {
@@ -47,7 +47,8 @@ class SliderCustom extends StatelessWidget {
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Theme.of(context).primaryColor,
                 inactiveTickMarkColor: Theme.of(context).primaryColor,
-                valueIndicatorShape: CircleWithTextThumbShape (
+                valueIndicatorShape: CircleWithTextThumbShape ( // Custom value indicator
+                  circleRadius: 16.0,
                   text: value.round().toString(),
                   textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Theme.of(context).primaryColor,

@@ -9,7 +9,7 @@ class PermissionHandler {
 
     if (!(statuses[Permission.storage] as PermissionStatus).isGranted &&
         !(statuses[Permission.mediaLibrary] as PermissionStatus).isGranted) {
-      await openAppSettings();
+      await openAppSettings(); // Open app settings if permission is denied
     }
   }
 
@@ -19,7 +19,7 @@ class PermissionHandler {
     ].request();
 
     if (!(statuses[Permission.camera] as PermissionStatus).isGranted) {
-      await openAppSettings();
+      await openAppSettings(); // Open app settings if permission is denied
     }
   }
 }

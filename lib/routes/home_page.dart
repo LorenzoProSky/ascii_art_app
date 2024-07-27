@@ -37,6 +37,7 @@ class HomePage extends StatelessWidget {
                               ? screenHeight * 0.03
                               : 30,
                         ),
+                        // First row with exit button and theme switcher
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -47,6 +48,7 @@ class HomePage extends StatelessWidget {
                             SizedBox(
                               width: screenWidth * 0.65,
                             ),
+                            // Theme switcher
                             Consumer<ThemeProvider>(
                               builder: (context, themeProvider, _) {
                                 var currentIcon =
@@ -83,6 +85,7 @@ class HomePage extends StatelessWidget {
                               ? screenHeight * 0.12
                               : 110,
                         ),
+                        // Home page image
                         Image(
                           image: (themeProvider.getTheme().brightness ==
                                   Brightness.dark)
@@ -99,6 +102,7 @@ class HomePage extends StatelessWidget {
                               ? screenHeight * 0.052
                               : 52,
                         ),
+                        // Select button
                         HomePageSelectButton(
                           width: (screenWidth * 0.8 < 380)
                               ? screenWidth * 0.8

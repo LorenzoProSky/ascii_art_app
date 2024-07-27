@@ -1,7 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
-
 import 'package:ascii_app/models/asciifier.dart';
 import 'package:ascii_app/models/image_selector.dart';
 import 'package:ascii_app/models/notifiers/image_path_cache.dart';
@@ -24,7 +21,7 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  bool _isAscii = false; // Is an image ASCII or not?
+  bool _isAscii = false; // There is an image ASCII
   String? _asciiImage; // Text ASCII Image
   double _pixelSensibility = 1.0;
   double _charSensibility = 1.0;
@@ -64,13 +61,15 @@ class _ImagePageState extends State<ImagePage> {
                               ? screenHeight * 0.03
                               : 30,
                         ),
+                        // First row with back button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             BackButtonCustom(
-                                size: (screenHeight * 0.04 < 40)
-                                    ? screenHeight * 0.04
-                                    : 40),
+                              size: (screenHeight * 0.04 < 40)
+                                  ? screenHeight * 0.04
+                                  : 40,
+                            ),
                           ],
                         ),
                       ],
@@ -82,6 +81,7 @@ class _ImagePageState extends State<ImagePage> {
                               ? screenHeight * 0.12
                               : 110,
                         ),
+                        // Image area
                         _imageArea(
                           context,
                           (screenWidth < 500) ? screenWidth : 500,
@@ -94,6 +94,7 @@ class _ImagePageState extends State<ImagePage> {
                               ? screenHeight * 0.4
                               : 40,
                         ),
+                        // ASCIIfy, Copy, Select Image buttons
                         Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -137,30 +138,33 @@ class _ImagePageState extends State<ImagePage> {
                               ? screenHeight * 0.025
                               : 25,
                         ),
+                        // Sliders
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _sensibilitySlider(
-                                context,
-                                (screenWidth * 0.35 < 135)
-                                    ? screenWidth * 0.35
-                                    : 135,
-                                (screenHeight * 0.045 < 45)
-                                    ? screenHeight * 0.045
-                                    : 45),
+                              context,
+                              (screenWidth * 0.35 < 135)
+                                  ? screenWidth * 0.35
+                                  : 135,
+                              (screenHeight * 0.045 < 45)
+                                  ? screenHeight * 0.045
+                                  : 45,
+                            ),
                             SizedBox(
                               width: (screenWidth * 0.01 < 10)
                                   ? screenWidth * 0.01
                                   : 10,
                             ),
                             _charSlider(
-                                context,
-                                (screenWidth * 0.35 < 135)
-                                    ? screenWidth * 0.35
-                                    : 135,
-                                (screenHeight * 0.045 < 45)
-                                    ? screenHeight * 0.045
-                                    : 45),
+                              context,
+                              (screenWidth * 0.35 < 135)
+                                  ? screenWidth * 0.35
+                                  : 135,
+                              (screenHeight * 0.045 < 45)
+                                  ? screenHeight * 0.045
+                                  : 45,
+                            ),
                           ],
                         ),
                         _slidersText(
@@ -180,6 +184,9 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // ---- Widgets ----
+
+  // Image area: selected image or zoomable text ASCII image
   Widget _imageArea(BuildContext context, double width, double height) {
     return SizedBox(
       width: width,
@@ -206,6 +213,7 @@ class _ImagePageState extends State<ImagePage> {
                   ),
                 )
               : Center(
+                  // No image selected
                   child: Text(
                     "- Select an Image to ASCIIfy -",
                     textAlign: TextAlign.center,
@@ -215,24 +223,27 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // Asciify the image into an ASCII image text
   Widget _asciifyButton(BuildContext context, double width, double height) {
+    // Capture instances before the async gap
+    final imagePath =
+        Provider.of<ImagePathCache>(context, listen: false).imagePath;
+    final overlay = LoadingOverlay.of(context);
+    
     return TextButtonCustom(
       buttonText: "ASCIIfy",
       width: width,
       height: height,
       onTap: () async {
-        LoadingOverlay.of(context).show();
+        overlay.show();
         await Future.delayed(const Duration(milliseconds: 100));
 
-        // Asciify the image into an ASCII image text
         var temp = await Asciifier.asciify(
-            Provider.of<ImagePathCache>(context, listen: false).imagePath,
-            _pixelSensibility.toInt(),
-            _charSensibility.toInt());
+            imagePath, _pixelSensibility.toInt(), _charSensibility.toInt());
         _isAscii = true;
 
         await Future.delayed(const Duration(milliseconds: 100));
-        LoadingOverlay.of(context).hide();
+        overlay.hide();
 
         setState(() {
           _asciiImage = temp;
@@ -242,8 +253,8 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // Select Image from the Camera or the Storage according to "needCamera"
   Widget _selectImageButton(BuildContext context, double size) {
-    // Select Image from the Camera or the Storage according to "needCamera"
     return (widget.arguments.needCamera)
         ? IconButtonCustom(
             iconData: Icons.camera_alt,
@@ -269,6 +280,7 @@ class _ImagePageState extends State<ImagePage> {
           );
   }
 
+  // Copy the ASCII image text to the clipboard
   Widget _copyButton(BuildContext context, double size) {
     return IconButtonCustom(
       iconData: Icons.copy,
@@ -297,6 +309,7 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // Sliders for pixel sensibility
   Widget _sensibilitySlider(BuildContext context, double width, double height) {
     return SliderCustom(
       value: _pixelSensibility,
@@ -314,6 +327,7 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // Sliders for char sensibility
   Widget _charSlider(BuildContext context, double width, double height) {
     return SliderCustom(
       value: _charSensibility,
@@ -331,6 +345,7 @@ class _ImagePageState extends State<ImagePage> {
     );
   }
 
+  // Text under the sliders
   Widget _slidersText(BuildContext context, double width, double height) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

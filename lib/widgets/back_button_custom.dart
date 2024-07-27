@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Custom back button widget: pop the current screen
 class BackButtonCustom extends StatelessWidget {
   const BackButtonCustom({
     Key? key,

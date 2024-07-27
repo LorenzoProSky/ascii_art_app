@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
+// Custom slider valueIndicatorShape
 class CircleWithTextThumbShape extends SliderComponentShape {
+  final double circleRadius;
   final String text;
   final TextStyle textStyle;
 
-  CircleWithTextThumbShape(
-      {this.text = '',
-      this.textStyle = const TextStyle(fontSize: 12.0, color: Colors.white)});
+  CircleWithTextThumbShape({required this.text, required this.textStyle, required this.circleRadius});
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return const Size.fromRadius(20.0); // Adjust based on your requirements
+    return const Size.fromRadius(16.0);
   }
 
+  // Paint the circle and text
   @override
   void paint(
     PaintingContext context,
-    Offset center,
-    {
+    Offset center, {
     required Animation<double> activationAnimation,
     required Animation<double> enableAnimation,
     required bool isDiscrete,
@@ -35,9 +35,9 @@ class CircleWithTextThumbShape extends SliderComponentShape {
       ..style = PaintingStyle.fill;
 
     // Draw the circle at the center
-    canvas.drawCircle(center, 16.0, circlePaint); // Adjust radius as needed
+    canvas.drawCircle(center, circleRadius, circlePaint);
 
-    // Calculate text size and position
+    // Draw the text at the center
     final textPainter = TextPainter(
       text: TextSpan(text: text, style: textStyle),
       textAlign: TextAlign.center,

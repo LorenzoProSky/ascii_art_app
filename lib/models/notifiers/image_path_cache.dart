@@ -1,6 +1,6 @@
-// ignore_for_file: unnecessary_getters_setters
 import 'package:flutter/foundation.dart';
 
+// Image path cache: cache the image path to pass it around the app
 class ImagePathCache with ChangeNotifier {
   String _imagePath = "";
 

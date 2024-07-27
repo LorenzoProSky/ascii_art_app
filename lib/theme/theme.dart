@@ -1,6 +1,7 @@
 import 'package:ascii_app/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
+// AppTheme class to define the light and dark themes
 class AppTheme {
   const AppTheme();
   static ThemeData lightTheme = ThemeData(

@@ -1,30 +1,31 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
+// Loading overlay widget: show a loading spinner on top of the widget below
 class LoadingOverlay extends StatefulWidget {
   const LoadingOverlay({Key? key, required this.child}) : super(key: key);
 
-  final Widget child; // Used to overlay on the widget below
+  final Widget child; // To overlay on the widget below
 
-  // ignore: library_private_types_in_public_api
-  static _LoadingOverlayState of(BuildContext context) {
-    return context.findAncestorStateOfType<_LoadingOverlayState>()!;
+  static LoadingOverlayState of(BuildContext context) {
+    return context.findAncestorStateOfType<LoadingOverlayState>()!;
   }
 
   @override
-  State<LoadingOverlay> createState() => _LoadingOverlayState();
+  State<LoadingOverlay> createState() => LoadingOverlayState();
 }
 
-class _LoadingOverlayState extends State<LoadingOverlay> {
+class LoadingOverlayState extends State<LoadingOverlay> {
   bool _isLoading = false;
 
+  // Show the loading spinner
   void show() {
     setState(() {
       _isLoading = true;
     });
   }
 
+  // Hide the loading spinner
   void hide() {
     setState(() {
       _isLoading = false;
@@ -35,7 +36,9 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        widget.child,
+        widget.child, // The widget below
+
+        // Backdrop filter to blur the background
         if (_isLoading)
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
@@ -47,6 +50,8 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
               ),
             ),
           ),
+
+        // Loading spinner
         if (_isLoading)
           Center(
             child: CircularProgressIndicator(

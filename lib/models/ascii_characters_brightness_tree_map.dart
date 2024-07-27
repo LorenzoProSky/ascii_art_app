@@ -1,9 +1,10 @@
 import 'dart:collection';
 
+// Map of brightness values to ASCII characters for various sensitivities
 class AsciiCharactersBrightnessTreeMap {
   // TreeMap for range values keys -> Single ch
   SplayTreeMap<double, String> _treeMap = SplayTreeMap();
-  var _keyRange = 35.1; // Full distance between 2 ch
+  var _keyRange = 35.1; // Default distance between 2 ch (MIN)
 
   AsciiCharactersBrightnessTreeMap(int charSensibility) {
     Map<double, String> selectedMap;
@@ -25,6 +26,20 @@ class AsciiCharactersBrightnessTreeMap {
     _treeMap = SplayTreeMap<double, String>.from(selectedMap, _compare);
   }
 
+  // Comparator function for the TreeMap
+  int _compare(double mapKey, double externalValue) {
+    var halfRange = _keyRange / 2;
+    if (mapKey == 250 && (externalValue >= (250 - halfRange))) return 0;
+    if (mapKey == 4.3 && (externalValue < (4.3 + halfRange))) return 0;
+
+    var temp = mapKey - externalValue;
+    if (temp <= -halfRange) return 1; // Up - Brighther ch
+    if (temp > halfRange) return -1; // Down - Darker ch
+
+    return 0;
+  }
+
+  // Small ASCII character set
   final Map<double, String> _brightnessCharacterMin = {
     250: " ",
     214.9: ".",
@@ -36,6 +51,7 @@ class AsciiCharactersBrightnessTreeMap {
     4.3: "@",
   };
 
+  // Medium ASCII character set
   final Map<double, String> _brightnessCharacterMid = {
     250: " ",
     243.7: ".",
@@ -79,6 +95,7 @@ class AsciiCharactersBrightnessTreeMap {
     4.3: "@",
   };
 
+  // Large ASCII character set
   final Map<double, String> _brightnessCharacterMax = {
     250: " ",
     247.3: "`",
@@ -174,21 +191,7 @@ class AsciiCharactersBrightnessTreeMap {
     4.3: "@",
   };
 
-  // Function used to "create" the ranges of keys
-  int _compare(double mapKey, double externalValue) {
-    var halfRange = _keyRange / 2;
-    if (mapKey == 250 && (externalValue >= (250 - halfRange))) return 0;
-    if (mapKey == 4.3 && (externalValue < (4.3 + halfRange))) {
-      return 0;
-    }
-
-    var temp = mapKey - externalValue;
-    if (temp <= -halfRange) return 1; // Up - Brighther ch
-    if (temp > halfRange) return -1; // Down - Darker ch
-
-    return 0;
-  }
-
+  // Get the ASCII character for the given brightness value
   String brightnessToChar(double input) {
     var output = _treeMap[input];
     return output ?? " ";

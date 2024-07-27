@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// AppColor class to store the color constants
 class AppColor {
   static const Color lightBackground = Color.fromARGB(255, 245, 243, 239);
   static const Color darkBackground = Color.fromARGB(255, 12, 18, 10);

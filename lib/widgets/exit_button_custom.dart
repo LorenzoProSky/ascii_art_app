@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Custom exit button widget: exit the app
 class ExitButtonCustom extends StatelessWidget {
   const ExitButtonCustom({
     Key? key,

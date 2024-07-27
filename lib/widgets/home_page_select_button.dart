@@ -3,6 +3,7 @@ import 'package:ascii_app/routes/image_page/image_page_arguments.dart';
 import 'package:ascii_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
+// Fully custom home page select button
 class HomePageSelectButton extends StatelessWidget {
   const HomePageSelectButton({
     Key? key,
@@ -64,6 +65,7 @@ class HomePageSelectButton extends StatelessWidget {
     );
   }
 
+  // Storage button
   Widget _mediaStoragePermissionAndToImagePageButton(BuildContext context) {
     return InkWell(
       onTap: () async {
@@ -105,6 +107,7 @@ class HomePageSelectButton extends StatelessWidget {
     );
   }
 
+  // Camera button
   Widget _cameraPermissionAndToImagePageButton(BuildContext context) {
     return InkWell(
       onTap: () async {

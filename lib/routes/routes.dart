@@ -22,6 +22,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider<ImagePathCache>(
             create: (_) => ImagePathCache(),
+            // LoadingOverlay on top of ImagePage
             child: LoadingOverlay(
               child: ImagePage(settings.arguments as ImagePageArguments),
             ),

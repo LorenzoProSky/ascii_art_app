@@ -5,11 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  WidgetsFlutterBinding
-      .ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  // Set preferred orientations
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitUp, // Portrait mode only
   ]).then((_) => runApp(
+        // Provide the ThemeProvider to the widget tree
         ChangeNotifierProvider<ThemeProvider>(
           create: (_) => ThemeProvider(),
           child: const AsciiApp(),
@@ -24,6 +25,7 @@ class AsciiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "ASCII Art Converter App",
+      // Get the theme from the ThemeProvider
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       themeMode: ThemeMode.light,
       initialRoute: RouteGenerator.homePage,
