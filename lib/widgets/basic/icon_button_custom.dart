@@ -20,7 +20,7 @@ class IconButtonCustom extends StatelessWidget {
         height: size,
         width: size,
         child: Material(
-          elevation: 8.0,
+          elevation: isActive ? 8.0 : 0.0,
           shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(size),
           child: InkWell(
@@ -30,7 +30,7 @@ class IconButtonCustom extends StatelessWidget {
               height: size,
               width: size,
               decoration: BoxDecoration(
-                color: Theme.of(context).focusColor,
+                color: isActive ? Theme.of(context).focusColor : Theme.of(context).focusColor.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(size),
               ),
               child: Icon(

@@ -36,6 +36,8 @@ To install and run the ASCII Art Converter App, follow these steps:
 
 Make sure you have Flutter and Dart installed on your machine before running the app.
 
+Alternatively, you can download the APK file from the [apk-releases](/build/app/outputs/flutter-apk/app-release.apk) and install it on your Android device.
+
 ## Possible Additions
 
 - *Color formatting option*: allow users to convert images into colored ASCII art.

@@ -23,7 +23,7 @@ class TextButtonCustom extends StatelessWidget {
         height: height,
         width: width,
         child: Material(
-          elevation: 8.0,
+          elevation: isActive ? 8.0 : 0.0,
           shadowColor: Theme.of(context).hintColor,
           borderRadius: BorderRadius.circular(height),
           child: InkWell(
@@ -33,7 +33,7 @@ class TextButtonCustom extends StatelessWidget {
               height: height,
               width: width,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: isActive ? Theme.of(context).primaryColor : Colors.grey.shade400,
                 borderRadius: BorderRadius.circular(height),
               ),
               child: Row(
