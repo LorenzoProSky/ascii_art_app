@@ -13,14 +13,12 @@ Polished minimal mobile app (for *Android* and *iOS*) developed in *Flutter*, wh
 
 Here are some screenshots* of the ASCII Art Converter App in action:
 
-![Home Screen](screenshots/home_screen.jpg)
-![Ascii Art](screenshots/ascii_art.jpg)
-![Copying to Clipboard](screenshots/copy_to_clipboard.jpg)
-![Pixel Sensitivity](screenshots/pixel_sensitivity.jpg)
-![Zooming](screenshots/zoom.jpg)
-![From the Camera](screenshots/from_camera.jpg)
-![Light Theme](screenshots/light_theme.jpg)
-![Dark Theme](screenshots/dark_theme.jpg)
+![Home Screen](resources/screenshots/home_screen.jpg)
+![Ascii Art](resources/screenshots/ascii_art.jpg)
+![Copying to Clipboard & Zoom](resources/screenshots/copy_clipboard_and_zoom.jpg)
+![Pixel Sensitivity](resources/screenshots/pixel_sensitivity.jpg)
+![From the Camera](resources/screenshots/from_camera.jpg)
+![Themes](resources/screenshots/themes.jpg)
 
 *The screenshots have been compressed, the actual app has a higher quality and resolution.
 
@@ -36,7 +34,7 @@ To install and run the ASCII Art Converter App, follow these steps:
 
 Make sure you have Flutter and Dart installed on your machine before running the app.
 
-Alternatively, you can download the APK file from the [apk-releases](/build/app/outputs/flutter-apk/app-release.apk) and install it on your Android device.
+Alternatively, you can download the APK file from the [apk-releases](resources/release/app-release.apk) and install it on your Android device.
 
 ## Possible Additions
 
